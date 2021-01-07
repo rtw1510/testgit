@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kk">
+    <resultMap id="Pb_CustBase_Info_Result" type="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBase_Info">
+        <result column="Record_Id" property="Record_Id"  />
+        <result column="InfRecType" property="InfRecType"  />
+        <result column="InfSurcCode" property="InfSurcCode"  />
+        <result column="Name" property="Name"  />
+        <result column="IDType" property="IDType"  />
+        <result column="IDNum" property="IDNum"  />
+        <result column="RptDate" property="RptDate"  />
+        <result column="RptDateCode" property="RptDateCode"  />
+        <result column="Cimoc" property="Cimoc"  />
+        <result column="CustomerType" property="CustomerType"  />
+        <result column="Sex" property="Sex"  />
+        <result column="DOB" property="DOB"  />
+        <result column="Nation" property="Nation"  />
+        <result column="HouseAdd" property="HouseAdd"  />
+        <result column="HhDist" property="HhDist"  />
+        <result column="CellPhone" property="CellPhone"  />
+
+
+
+        <collection property="Pb_CustBaseOth_Info_List"
+                    ofType="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBaseOth_Info"
+                    select="selectPbCustBaseOthInfoByPbCustBaseInfo"
+                    column="RECORD_ID"/>
+    </resultMap>
+    <select id="selectPbCustBaseOthInfoByPbCustBaseInfo" resultType="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBaseOth_Info">
+        select * from PB_CUSTBASEOTH_INFO where MAIN_ID=#{recordid}
+    </select>
+
+
+    <select id="selectAll" resultMap="Pb_CustBase_Info_Result">
+        select * from PB_CUSTBASE_INFO
+        where 1=1  and
+        <if test="fromId != null">
+            PAGENUMBER <![CDATA[ >= ]]> #{fromId}
+        </if>
+        <if test="toId != null">
+            and PAGENUMBER <![CDATA[ <= ]]>  #{toId}
+        </if>
+    </select>
+</mapper>

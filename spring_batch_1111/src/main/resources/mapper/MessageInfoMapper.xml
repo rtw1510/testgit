@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MessageInfoMapper">
+	<resultMap id="BatchJob_Result" type="com.dhcc.xml.entity.BatchJob">
+		<result property="id" column="ID" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobName" column="JOB_NAME" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobLev" column="JOB_LEV" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobDesc" column="JOB_DESC" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobFlows" column="JOB_FLOWS" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="nextJob" column="NEXT_JOB" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobUpOne" column="JOB_UP_ONE" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobUpTwo" column="JOB_UP_TWO" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobSts" column="JOB_STS" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="remarks" column="REMARK" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="jobTimes" column="JOB_TIMES" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="javaPath" column="JAVA_PATH" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="javaFun" column="JAVA_FUN" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+		<result property="infrecType" column="INFRECTYPE" typeHandler="com.dhcc.xml.util.StringTypeHandler"/>
+	</resultMap>
+	<sql id="BatchJob_Columns">
+		 <![CDATA[
+		 	ID,
+			JOB_NAME,
+			JOB_LEV,
+			JOB_DESC,
+			JOB_FLOWS,
+			NEXT_JOB,
+			JOB_UP_ONE,
+			JOB_UP_TWO,
+			JOB_STS,
+			REMARK,
+			JOB_TIMES,
+			JAVA_PATH,
+			JAVA_FUN,
+			INFRECTYPE
+		 ]]>
+	</sql>
+
+	<!-- 新增报文序号 -->
+	<insert id="MessageInfo_insertMessageInfo">
+		INSERT INTO S_MSG_INFO(
+		ID,
+		INFRECTYPE,
+		GEN_FILE_NAME,
+		GEN_FILE_PATH,
+		GEN_NUM,
+		GEN_DATE,
+		GEN_STS,
+		GEN_OPRR,
+		GEN_BRNO,
+		GEN_DOWNLOAD_FLAG,
+		TX_DATE,
+		FILE_TYPE,
+		JOB_NAME)
+		VALUES(
+		S_MSG_INFO_SEQ.NEXTVAL,
+		#{infrectype,jdbcType=VARCHAR},
+		#{gen_file_name,jdbcType=VARCHAR},
+		#{gen_file_path,jdbcType=VARCHAR},
+		#{gen_num,jdbcType=VARCHAR},
+		#{gen_date,jdbcType=VARCHAR},
+		#{gen_sts,jdbcType=VARCHAR},
+		#{gen_oprr,jdbcType=VARCHAR},
+		#{gen_brno,jdbcType=VARCHAR},
+		#{gen_download_flag,jdbcType=VARCHAR},
+		#{tx_date,jdbcType=VARCHAR},
+		#{file_type,jdbcType=VARCHAR},
+		#{job_name,jdbcType=VARCHAR})
+	</insert>
+	<!-- 新增报文执行情况信息表 -->
+	<insert id="MessageInfo_insertExecuteInfo">
+		INSERT INTO G_EXECUTE_INFO(
+		ID,
+		BATCH_DATE,
+		JOB_ID,
+		STEP_ID,
+		STEP_DESC,
+		START_TIME,
+		END_TIME,
+		SUM_TIME,
+		EXECUTE_STS,
+		EXECUTE_MSG)
+		VALUES(
+		G_EXECUTE_INFO_SEQ.NEXTVAL,
+		FUN_GETSYSDATE,
+		#{jobId,jdbcType=VARCHAR},
+		#{stepId,jdbcType=VARCHAR},
+		#{stepDesc,jdbcType=VARCHAR},
+		#{startTime,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{sumTime,jdbcType=VARCHAR},
+		#{executeSts,jdbcType=VARCHAR},
+		#{executeMsg,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="MessageInfo_updateExecuteInfo">
+		UPDATE G_EXECUTE_INFO SET
+		END_TIME = #{endTime},
+		EXECUTE_STS = #{executeSts},
+		EXECUTE_MSG = #{executeMsg}
+		WHERE JOB_ID =
+		#{jobId} AND EXECUTE_STS = '3'
+	</update>
+
+	<select id="MessageInfo_getBatchJob" resultMap="BatchJob_Result">
+		SELECT
+		<include refid="BatchJob_Columns" />
+		FROM BATCH_JOB WHERE JOB_NAME = #{jobName} AND JOB_STS ='1'
+	</select>
+
+	<select id="MessageInfo_getBatchJobList" resultMap="BatchJob_Result">
+		SELECT
+		<include refid="BatchJob_Columns" />
+		FROM BATCH_JOB
+	</select>
+
+	<select id="MessageInfo_getBatchJobup" resultMap="BatchJob_Result">
+		SELECT
+		<include refid="BatchJob_Columns" />
+		FROM BATCH_JOB where INFRECTYPE = #{infrence}
+	</select>
+
+	<!-- 机构关联限制 -->
+	<sql id="Messageinfo_where">
+		<if test="infrectype !=''">
+			and T1.INFRECTYPE =
+			#{infrectype,jdbcType=VARCHAR}
+		</if>
+		<if test="br_no !='' and br_no !=null">
+			EXISTS (SELECT 1 FROM
+			S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no,jdbcType=VARCHAR}
+			CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<!-- 更新已生成报文的报文状态 -->
+	<update id="MessageInfo_updateRptType" parameterType="java.util.HashMap">
+		${updateSql}
+		<include refid="Messageinfo_where" />
+	</update>
+
+	<!-- 更新已生成报文的报文名称 -->
+	<update id="MessageInfo_updateFileName" parameterType="java.util.HashMap">
+		UPDATE ${tableName} T1 SET T1.FILENAME =
+		#{fileName,jdbcType=VARCHAR},T1.RPT_DATE=FUN_GETSYSDATE() WHERE
+		T1.PAGENUMBER <![CDATA[ >= ]]>
+		#{formPageNumber,jdbcType=VARCHAR} AND T1.PAGENUMBER<![CDATA[ <= ]]>
+		#{toPageNumber,jdbcType=VARCHAR} AND T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		<include refid="Messageinfo_where" />
+	</update>
+	<update id="MessageInfo_updateErrorTable">
+		UPDATE V_ERROR_INFO T1
+		SET (T1.CUST_NO,
+		T1.RECORD_OPRR_NO,
+		T1.RECORD_BRNO,
+		T1.RECORD_BRNAME,
+		T1.RECORD_ID,
+		T1.MAIN_ID,
+		T1.YUANID,
+		T1.DATASOURCE) =
+		(SELECT T2.CUST_NO,
+		T2.OPRR_NO,
+		T2.BR_NO,
+		FUN_GETBRNAME_BRNO(T2.BR_NO),
+		T2.RECORD_ID,
+		T2.RECORD_ID,
+		T2.ID,
+		T2.DATASOURCE
+		FROM #{mainTableName} T2
+		WHERE T1.RECORD_ID =
+		T2.RECORD_ID)
+		 WHERE EXISTS
+ (SELECT 1 FROM #{mainTableName} T2 WHERE T1.RECORD_ID = T2.RECORD_ID AND T2.RPT_TYPE='1')
+	</update>
+
+	<update id="MessageInfo_singleUpdateErrorTable">
+		UPDATE V_ERROR_INFO T1
+		SET (T1.CUST_NO,
+		T1.FB_FILE_NAME,
+		T1.RECORD_OPRR_NO,
+		T1.RECORD_BRNO,
+		T1.RECORD_BRNAME,
+		T1.RECORD_ID,
+		T1.MAIN_ID,
+		T1.YUANID,
+		T1.DATASOURCE) =
+		(SELECT T2.CUST_NO,
+		#{mainTableName},
+		T2.OPRR_NO,
+		T2.BR_NO,
+		FUN_GETBRNAME_BRNO(T2.BR_NO),
+		T2.RECORD_ID,
+		T2.RECORD_ID,
+		T2.ID,
+		T2.DATASOURCE
+		FROM #{mainTableName} T2
+		WHERE T1.RECORD_ID =
+		T2.RECORD_ID)
+		 WHERE EXISTS
+ (SELECT 1 FROM #{mainTableName} T2 WHERE T1.RECORD_ID = T2.RECORD_ID AND T2.RPT_TYPE IN('1','4')  AND T2.RECORD_ID = #{record_id})
+	</update>
+
+	<update id="MessageInfo_updateCheckSts">
+		UPDATE #{mainTableName} T1
+		SET CHECK_STS = '2'
+		WHERE EXISTS
+		(SELECT 1 FROM V_ERROR_INFO T2 WHERE T1.RECORD_ID = T2.RECORD_ID AND T1.RPT_TYPE IN('1','4'))
+	</update>
+
+	<update id="MessageInfo_singleUpdateCheckStsErr">
+		UPDATE #{mainTableName} T1
+		SET CHECK_STS = '2'
+		WHERE EXISTS
+		(SELECT 1 FROM V_ERROR_INFO T2 WHERE T1.RECORD_ID = T2.RECORD_ID AND T1.RPT_TYPE IN('1','4') AND T2.RECORD_ID = #{record_id})
+		AND T1.RECORD_ID = #{record_id}
+	</update>
+
+	<update id="MessageInfo_singleUpdateCheckStsSucc">
+		UPDATE #{mainTableName} T1
+		SET CHECK_STS = '1'
+		WHERE NOT EXISTS
+		(SELECT 1 FROM V_ERROR_INFO T2 WHERE T1.RECORD_ID = T2.RECORD_ID AND T1.RPT_TYPE IN('1','4') AND T2.RECORD_ID = #{record_id})
+		AND T1.RECORD_ID = #{record_id}
+	</update>
+	<!-- 获取正在跑批的步骤数 -->
+    <select id="MessageInfo_getCount_ExcuteSts_count" resultType="int">
+    	SELECT COUNT(1) FROM G_EXECUTE_INFO WHERE EXECUTE_STS = '2'
+    </select>
+</mapper>

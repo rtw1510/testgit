@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-InCtrctIDCagsInfMapper">
+
+	<!-- 基础段+额度信息段 -->
+	<resultMap id="Pb_LnctrctBase_Info_Result220" type="com.dhcc.xml.per.entity.credit.db.Pb_LnctrctBase_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="ContractCode" property="ContractCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="CreditLimType" property="CreditLimType" />
+		<result column="LimLoopFlg" property="LimLoopFlg" />
+		<result column="CreditLim" property="CreditLim" />
+		<result column="Cy" property="Cy" />
+		<result column="ConEffDate" property="ConEffDate" />
+		<result column="ConExpDate" property="ConExpDate" />
+		<result column="ConStatus" property="ConStatus" />
+		<result column="CreditRest" property="CreditRest" />
+		<result column="CreditRestCode" property="CreditRestCode" />
+		
+		<result column="LNCTRCTBASE_FLAG" property="LNCTRCTBASE_FLAG" />
+		<result column="LNCTRCTREL_FLAG" property="LNCTRCTREL_FLAG" />
+		<result column="LNCTRCTLIM_FLAG" property="LNCTRCTLIM_FLAG" />
+
+		<collection property="Pb_LnctrctRel_Info_List" resultMap="Pb_LnctrctRel_Info_Result220"></collection>
+	</resultMap>
+
+	<!-- 共同受信人信息段 -->
+	<resultMap id="Pb_LnctrctRel_Info_Result220" type="com.dhcc.xml.per.entity.credit.db.Pb_LnctrctRel_Info">
+		<result column="BrerType" property="BrerType" />
+		<result column="CertRelName" property="CertRelName" />
+		<result column="CertRelIDType" property="CertRelIDType" />
+		<result column="CertRelIDNum" property="CertRelIDNum" />
+	</resultMap>
+
+	<sql id="Pb_LnctrctBase_Info_Columns">
+	    <![CDATA[
+	  		T1.Record_Id,
+			T1.InfRecType,
+			T1.ContractCode,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.MngmtOrgCode,
+			T1.CreditLimType,
+			T1.LimLoopFlg,
+			ROUND(T1.CreditLim) AS CreditLim,
+			T1.Cy,
+			T1.ConEffDate,
+			T1.ConExpDate,
+			T1.ConStatus,
+			ROUND(T1.CreditRest) AS CreditRest,
+			T1.CreditRestCode,
+			T1.LNCTRCTLIM_FLAG,
+	   	    T1.LNCTRCTREL_FLAG,
+	  		T1.LNCTRCTBASE_FLAG,
+	  		T2.BrerType,
+			T2.CertRelName,
+			T2.CertRelIDType,
+			T2.CertRelIDNum
+	    ]]>
+	</sql>
+
+	<sql id="Pb_LnctrctBase_info_select_where">
+		<if test="br_no !=''">
+			and EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+		</if>
+
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+
+	</sql>
+
+	<!-- 个人授信协议信息记录信息[1..1] -->
+	<select id="CtrctBsSgmtJob_selectAllInfo" resultMap="Pb_LnctrctBase_Info_Result220">
+		SELECT <include refid="Pb_LnctrctBase_Info_Columns" /> FROM PB_LNCTRCTBASE_INFO T1 
+		LEFT JOIN PB_LNCTRCTREL_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.LNCTRCTREL_FLAG = '1')
+		WHERE T1.INFRECTYPE = '220'
+		<include refid="Pb_LnctrctBase_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="CtrctBsSgmtJob_updatePageNumber">
+		UPDATE PB_LNCTRCTBASE_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '220'
+		<include refid="Pb_LnctrctBase_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="CtrctBsSgmtJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_LNCTRCTBASE_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '220'
+		<include refid="Pb_LnctrctBase_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="CtrctBsSgmtJob_updateCheckSts">
+		UPDATE PB_LNCTRCTBASE_INFO T1 SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '220'
+		<include refid="Pb_LnctrctBase_info_select_where" />
+	</update>
+	<delete id="CtrctBsSgmtJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT  1
+		FROM PB_LNCTRCTBASE_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '220'
+		<include refid="Pb_LnctrctBase_info_select_where" />
+		)
+	</delete>
+
+</mapper>

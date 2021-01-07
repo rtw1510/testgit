@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-EnAcctInfMapper">
+	<resultMap id="Eb_CorpAcct_Info_Result410" type="com.dhcc.xml.ent.entity.loaninfo.db.Eb_CorpAcct_Info">
+		<result column="Record_Id" property="Record_Id"/>
+		<result column="InfRecType" property="InfRecType"/>
+		<result column="AcctType" property="AcctType"/>
+		<result column="AcctCode" property="AcctCode"/>
+		<result column="RptDate" property="RptDate"/>
+		<result column="RptDateCode" property="RptDateCode"/>
+		<result column="Name" property="Name"/>
+		<result column="IDType" property="IDType"/>
+		<result column="IDNum" property="IDNum"/>
+		<result column="MngmtOrgCode" property="MngmtOrgCode"/>
+		<result column="BusiLines" property="BusiLines"/>
+		<result column="BusiDtlLines" property="BusiDtlLines"/>
+		<result column="OpenDate" property="OpenDate"/>
+		<result column="Cy" property="Cy"/>
+		<result column="AcctCredLine" property="AcctCredLine"/>
+		<result column="LoanAmt" property="LoanAmt"/>
+		<result column="Flag" property="Flag"/>
+		<result column="DueDate" property="DueDate"/>
+		<result column="RepayMode" property="RepayMode"/>
+		<result column="RepayFreqcy" property="RepayFreqcy"/>
+		<result column="ApplyBusiDist" property="ApplyBusiDist"/>
+		<result column="GuarMode" property="GuarMode"/>
+		<result column="OthRepyGuarWay" property="OthRepyGuarWay"/>
+		<result column="LoanTimeLimCat" property="LoanTimeLimCat"/>
+		<result column="LoaFrm" property="LoaFrm"/>
+		<result column="ActInvest" property="ActInvest"/>
+		<result column="FundSou" property="FundSou"/>
+		<result column="AssetTrandFlag" property="AssetTrandFlag"/>
+		<result column="Mcc" property="Mcc"/>
+		<result column="InitCredName" property="InitCredName"/>
+		<result column="InitCedOrgCode" property="InitCedOrgCode"/>
+		<result column="OrigDbtCate" property="OrigDbtCate"/>
+		<result column="InitRpySts" property="InitRpySts"/>
+		
+		<result column="CORPBASEINFO_FLAG" property="CORPBASEINFO_FLAG"/>
+		<result column="CORPRLT_FLAG" property="CORPRLT_FLAG"/>
+		<result column="CORPCCC_FLAG" property="CORPCCC_FLAG"/>
+		<result column="CORPMCC_FLAG" property="CORPMCC_FLAG"/>
+		<result column="CORPCRED_FLAG" property="CORPCRED_FLAG"/>
+		<result column="CORPACCRETU_FLAG" property="CORPACCRETU_FLAG"/>
+		<result column="CORPACCSPEC_FLAG" property="CORPACCSPEC_FLAG"/>
+
+		<collection property="Eb_CorpAccRlt_Info_List" resultMap="Eb_CorpAccRlt_Info_Result410"></collection>
+		<collection property="Eb_CorpAccRetu_Info" resultMap="Eb_CorpAccRetu_Info_Result410"></collection>
+		<collection property="Eb_CorpAccSpec_Info_List" resultMap="Eb_CorpAccSpec_Info_Result410"></collection>
+		<collection property="Eb_Guacct_Info_List" resultMap="Eb_Guacct_Info_Result410"></collection>
+	</resultMap>
+
+	<resultMap id="Eb_CorpAccRlt_Info_Result410" type="com.dhcc.xml.ent.entity.loaninfo.db.Eb_CorpAccRlt_Info" >
+		<result column="AcctCode" property="AcctCode"/>
+		<result column="ArlpIDType" property="ArlpIDType"/>
+		<result column="ArlpName" property="ArlpName"/>
+		<result column="ArlpCertType" property="ArlpCertType"/>
+		<result column="ArlpCertNum" property="ArlpCertNum"/>
+		<result column="ArlpType" property="ArlpType"/>
+		<result column="ArlpAmt" property="ArlpAmt"/>
+		<result column="WartySign" property="WartySign"/>
+		<result column="MaxGuarMcc" property="MaxGuarMcc"/>
+	</resultMap>
+
+	<resultMap id="Eb_CorpAccRetu_Info_Result410" type="com.dhcc.xml.ent.entity.loaninfo.db.Eb_CorpAccRetu_Info">
+		<result column="AcctStatus" property="AcctStatus"/>
+		<result column="AcctBal" property="AcctBal"/>
+		<result column="BalChgDate" property="BalChgDate"/>
+		<result column="FiveCate" property="FiveCate"/>
+		<result column="FiveCateAdjDate" property="FiveCateAdjDate"/>
+		<result column="PymtPrd" property="PymtPrd"/>
+		<result column="TotOverd" property="TotOverd"/>
+		<result column="AcctCode" property="AcctCode"/>
+		<result column="OverdPrinc" property="OverdPrinc"/>
+		<result column="OverdDy" property="OverdDy"/>
+		<result column="LatRpyDate" property="LatRpyDate"/>
+		<result column="LatRpyAmt" property="LatRpyAmt"/>
+		<result column="LatRpyPrincAmt" property="LatRpyPrincAmt"/>
+		<result column="RpmtType" property="RpmtType"/>
+		<result column="LatAgrrRpyDate" property="LatAgrrRpyDate"/>
+		<result column="LatAgrrRpyAmt" property="LatAgrrRpyAmt"/>
+		<result column="NxtAgrrRpyDate" property="NxtAgrrRpyDate"/>
+		<result column="CloseDate" property="CloseDate"/>
+	</resultMap>
+
+	<resultMap id="Eb_CorpAccSpec_Info_Result410" type="com.dhcc.xml.ent.entity.loaninfo.db.Eb_CorpAccSpec_Info">
+		<result column="AcctCode" property="AcctCode"/>
+		<result column="ChanTranType" property="ChanTranType"/>
+		<result column="TranDate" property="TranDate"/>
+		<result column="TranAmt" property="TranAmt"/>
+		<result column="DueTranMon" property="DueTranMon"/>
+		<result column="DetInfo" property="DetInfo"/>
+	</resultMap>
+	
+	<resultMap id="Eb_Guacct_Info_Result410" type="com.dhcc.xml.ent.entity.loaninfo.db.Eb_Guacct_Info" >
+		<result column="CcCode" property="CcCode"/>
+	</resultMap>
+
+	<sql id="Eb_CorpAcct_Info_Columns">
+	    <![CDATA[
+	    	T1.Record_Id,
+			T1.InfRecType,
+			T1.AcctType,
+			T1.AcctCode,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.MngmtOrgCode,
+			T1.BusiLines,
+			T1.BusiDtlLines,
+			T1.OpenDate,
+			T1.Cy,
+			ROUND(T1.AcctCredLine) AS AcctCredLine,
+			ROUND(T1.LoanAmt) AS LoanAmt,
+			T1.Flag,
+			T1.DueDate,
+			T1.RepayMode,
+			T1.RepayFreqcy,
+			T1.ApplyBusiDist,
+			T1.GuarMode,
+			T1.OthRepyGuarWay,
+			T1.LoanTimeLimCat,
+			T1.LoaFrm,
+			T1.ActInvest,
+			T1.FundSou,
+			T1.AssetTrandFlag,
+			T1.Mcc,
+			T1.InitCredName,
+			T1.InitCedOrgCode,
+			T1.OrigDbtCate,
+			T1.InitRpySts,
+			T1.CORPBASEINFO_FLAG,
+			T1.CORPRLT_FLAG,
+			T1.CORPCCC_FLAG,
+			T1.CORPMCC_FLAG,
+			T1.CORPCRED_FLAG,
+			T1.CORPACCRETU_FLAG,
+			T1.CORPACCSPEC_FLAG,
+			T2.ArlpIDType, 
+			T2.ArlpName,
+			T2.ArlpCertType, 
+			T2.ArlpCertNum,
+			T2.ArlpType, 
+			ROUND(T2.ArlpAmt) AS ArlpAmt, 
+			T2.WartySign, 
+			T2.MaxGuarMcc,
+			T3.AcctStatus, 
+			ROUND(T3.AcctBal) AS AcctBal, 
+			T3.BalChgDate, 
+			T3.FiveCate, 
+			T3.FiveCateAdjDate, 
+			T3.PymtPrd, 
+			ROUND(T3.TotOverd) AS TotOverd,
+			ROUND(T3.OverdPrinc) AS OverdPrinc, 
+			T3.OverdDy, 
+			T3.LatRpyDate, 
+			ROUND(T3.LatRpyAmt) AS LatRpyAmt, 
+			ROUND(T3.LatRpyPrincAmt) AS LatRpyPrincAmt,
+			T3.RpmtType, 
+			T3.LatAgrrRpyDate,
+			ROUND(T3.LatAgrrRpyAmt) AS LatAgrrRpyAmt,
+			T3.NxtAgrrRpyDate, 
+			T3.CloseDate,
+			T4.ChanTranType, 
+			T4.TranDate, 
+			ROUND(T4.TranAmt) AS TranAmt, 
+			T4.DueTranMon,
+			T4.DetInfo,
+			T5.CcCode
+	    ]]>
+	</sql>
+
+	<!-- 机构关联限制 -->
+	<sql id="Eb_CorpAcct_info_select_where">
+		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A WHERE A.BS_KEY_DATA=T1.ACCTCODE AND A.STS='1')
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+
+	<select id="EnAcctInfJob_selectAllInfo" resultMap="Eb_CorpAcct_Info_Result410">
+		SELECT <include refid="Eb_CorpAcct_Info_Columns" /> FROM EB_CORPACCT_INFO T1
+		LEFT JOIN EB_CORPACCRLT_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.CORPRLT_FLAG = '1') 
+		LEFT JOIN EB_CORPACCRETU_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.CORPACCRETU_FLAG = '1') 
+		LEFT JOIN EB_CORPACCSPEC_INFO T4 ON (T1.RECORD_ID = T4.MAIN_ID AND T1.CORPACCSPEC_FLAG = '1')
+		LEFT JOIN EB_GUACCT_INFO T5 ON (T1.RECORD_ID = T5.MAIN_ID AND T1.CORPCCC_FLAG = '1')
+		WHERE T1.INFRECTYPE = '410'
+		<include refid="Eb_CorpAcct_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnAcctInfJob_updatePageNumber">
+		UPDATE EB_CORPACCT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '410'
+		<include refid="Eb_CorpAcct_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnAcctInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_CORPACCT_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '410'
+		<include refid="Eb_CorpAcct_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnAcctInfJob_updateCheckSts">
+		UPDATE EB_CORPACCT_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '410'
+		<include refid="Eb_CorpAcct_info_select_where" />
+	</update>
+	<delete id="EnAcctInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_CORPACCT_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '410'
+		<include refid="Eb_CorpAcct_info_select_where" />
+		)
+	</delete>
+
+</mapper>

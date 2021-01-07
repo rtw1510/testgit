@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-IncomeStatementProfitAppropriation07Mapper">
+	<resultMap id="EB_FinaPro07_Info_Result" type="com.dhcc.xml.ent.entity.finance.db.EB_FinaPro07_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="EntName" property="EntName" />
+		<result column="EntCertType" property="EntCertType" />
+		<result column="EntCertNum" property="EntCertNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="SheetYear" property="SheetYear" />
+		<result column="SheetType" property="SheetType" />
+		<result column="SheetTypeDivide" property="SheetTypeDivide" />
+		<result column="AuditFirmName" property="AuditFirmName" />
+		<result column="AuditorName" property="AuditorName" />
+		<result column="AuditTime" property="AuditTime" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="RevenueOfSales" property="RevenueOfSales" />
+		<result column="CostOfSales" property="CostOfSales" />
+		<result column="BusinessAndOtherTaxes" property="BusinessAndOtherTaxes" />
+		<result column="SellingExpenses" property="SellingExpenses" />
+		<result column="GeneralAndAdministrativeE" property="GeneralAndAdministrativeExpenses" />
+		<result column="FinancialExpense" property="FinancialExpense" />
+		<result column="ImpairmentLossOfAssets" property="ImpairmentLossOfAssets" />
+		<result column="ProfitOrLossArisingFromCIFV" property="ProfitOrLossArisingFromChangesInFairValue" />
+		<result column="InvestmentIncome" property="InvestmentIncome" />
+		<result column="InvestmentIncomeFromABACE" property="InvestmentIncomeFromAffiliatedBusinessAndCooperativeEnterprise" />
+		<result column="OperatingProfits" property="OperatingProfits" />
+		<result column="NonOperatingIncome" property="NonOperatingIncome" />
+		<result column="NonOperatingExpenses" property="NonOperatingExpenses" />
+		<result column="NonCurrentAssets" property="NonCurrentAssets" />
+		<result column="ProfitBeforeTax" property="ProfitBeforeTax" />
+		<result column="IncomeTaxExpense" property="IncomeTaxExpense" />
+		<result column="NetProfit" property="NetProfit" />
+		<result column="BasicEarningsPerShare" property="BasicEarningsPerShare" />
+		<result column="DilutedEarningsPerShare" property="DilutedEarningsPerShare" />
+	</resultMap>
+
+	<sql id="Eb_FinaPro07_Info_Columns">
+		<![CDATA[
+			InfRecType,
+			EntName,
+			EntCertType,
+			EntCertNum,
+			RptDate,
+			SheetYear,
+			SheetType,
+			SheetTypeDivide,
+			AuditFirmName,
+			AuditorName,
+			AuditTime,
+			Cimoc,
+			RptDateCode,
+			to_char(RevenueOfSales,'FM99999999999999990.90') RevenueOfSales,
+			to_char(CostOfSales,'FM99999999999999990.90') CostOfSales,
+			to_char(BusinessAndOtherTaxes,'FM99999999999999990.90') BusinessAndOtherTaxes,
+			to_char(SellingExpenses,'FM99999999999999990.90') SellingExpenses,
+			to_char(GeneralAndAdministrativeE,'FM99999999999999990.90') GeneralAndAdministrativeE,
+			to_char(FinancialExpense,'FM99999999999999990.90') FinancialExpense,
+			to_char(ImpairmentLossOfAssets,'FM99999999999999990.90') ImpairmentLossOfAssets,
+			to_char(ProfitOrLossArisingFromCIFV,'FM99999999999999990.90') ProfitOrLossArisingFromCIFV,
+			to_char(InvestmentIncome,'FM99999999999999990.90') InvestmentIncome,
+			to_char(InvestmentIncomeFromABACE,'FM99999999999999990.90') InvestmentIncomeFromABACE,
+			to_char(OperatingProfits,'FM99999999999999990.90') OperatingProfits,
+			to_char(NonOperatingIncome,'FM99999999999999990.90') NonOperatingIncome,
+			to_char(NonOperatingExpenses,'FM99999999999999990.90') NonOperatingExpenses,
+			to_char(NonCurrentAssets,'FM99999999999999990.90') NonCurrentAssets,
+			to_char(ProfitBeforeTax,'FM99999999999999990.90') ProfitBeforeTax,
+			to_char(IncomeTaxExpense,'FM99999999999999990.90') IncomeTaxExpense,
+			to_char(NetProfit,'FM99999999999999990.90') NetProfit,
+			to_char(BasicEarningsPerShare,'FM99999999999999990.90') BasicEarningsPerShare,
+			to_char(DilutedEarningsPerShare,'FM99999999999999990.90') DilutedEarningsPerShare
+		]]>
+	</sql>
+	<!-- 机构关联限制 -->
+	<sql id="Eb_FinaPro07_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+
+	<!-- 读取数据 -->
+	<select id="IncomeStatementProfitAppropriation07Job_selectAllInfo" resultMap="EB_FinaPro07_Info_Result">
+		SELECT <include refid="Eb_FinaPro07_Info_Columns" /> FROM EB_FINAPRO07_INFO T1
+		WHERE T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro07_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="IncomeStatementProfitAppropriation07Job_updatePageNumber">
+		UPDATE EB_FINAPRO07_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro07_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="IncomeStatementProfitAppropriation07Job_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_FINAPRO07_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro07_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="IncomeStatementProfitAppropriation07Job_updateCheckSts">
+		UPDATE EB_FINAPRO07_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro07_info_select_where" />
+	</update>
+	<delete id="IncomeStatementProfitAppropriation07Job_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_FINAPRO07_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro07_info_select_where" />
+		)
+	</delete>
+
+</mapper>

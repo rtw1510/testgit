@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-InCtfItgInfMapper">
+	<resultMap id="InCtfItgInf_Result" type="com.dhcc.xml.per.entity.baseinfo.InCtfItgInf">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="OthName" property="OthName" />
+		<result column="OthIDType" property="OthIDType" />
+		<result column="OthIDNum" property="OthIDNum" />
+		<result column="OthAssFlg" property="OthAssFlg" />
+		<result column="InfSurcCode" property="InfSurcCode" />
+		<result column="RptDate" property="RptDate" />
+	</resultMap>
+	
+	<sql id="Pb_CustDefct_Info_Columns">
+		<![CDATA[
+			InfRecType, 
+			Name, 
+			IDType, 
+			IDNum, 
+			OthName,
+    		OthIDType, 
+    		OthIDNum, 
+    		OthAssFlg, 
+    		InfSurcCode, 
+    		RptDate 
+		]]>
+	</sql>
+	
+	<!-- 机构关联限制 -->
+	<sql id="Pb_CustDefct_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+		</if>
+
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+
+	</sql>
+	
+	<!-- 读取数据 -->
+	<select id="InCtfItgInfJob_selectAllInfo" resultMap="InCtfItgInf_Result">
+		SELECT <include refid="Pb_CustDefct_Info_Columns" /> FROM PB_CUSTDEFCT_INFO T1 
+		WHERE T1.INFRECTYPE = '140'
+		<include refid="Pb_CustDefct_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="InCtfItgInfJob_updatePageNumber">
+		UPDATE PB_CUSTDEFCT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND  T1.CHECK_STS = '1' AND T1.INFRECTYPE = '140'
+		<include refid="Pb_CustDefct_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="InCtfItgInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_CUSTDEFCT_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '140'
+		<include refid="Pb_CustDefct_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="InCtfItgInfJob_updateCheckSts">
+		UPDATE PB_CUSTDEFCT_INFO T1 SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '140'
+		<include refid="Pb_CustDefct_info_select_where"/>
+	</update>
+	<delete id="InCtfItgInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT  1
+		FROM PB_CUSTDEFCT_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '140'
+		<include refid="Pb_CustDefct_info_select_where"/>
+		)
+	</delete>
+
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-EnCtrctInfMdfcMapper">
+	<resultMap id="Eb_AcctMdf_Info_Result422" type="com.dhcc.xml.ent.entity.credit.db.Eb_AcctMdf_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="ModRecCode" property="ModRecCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="MdfcSgmtCode" property="MdfcSgmtCode" />
+
+		<collection property="Eb_CorpCtr_Info" resultMap="Eb_CorpCtr_Info_Result422"></collection>
+		<collection property="Eb_CorpCtrRel_Info_List" resultMap="Eb_CorpCtrRel_Info_Result422"></collection>
+	</resultMap>
+
+	<resultMap id="Eb_CorpCtr_Info_Result422" type="com.dhcc.xml.ent.entity.credit.db.Eb_CorpCtr_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="ContractCode" property="ContractCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="CreditLimType" property="CreditLimType" />
+		<result column="LimLoopFlg" property="LimLoopFlg" />
+		<result column="CreditLim" property="CreditLim" />
+		<result column="Cy" property="Cy" />
+		<result column="ConEffDate" property="ConEffDate" />
+		<result column="ConExpDate" property="ConExpDate" />
+		<result column="ConStatus" property="ConStatus" />
+		<result column="CreditRest" property="CreditRest" />
+		<result column="CreditRestCode" property="CreditRestCode" />
+	</resultMap>
+
+	<resultMap id="Eb_CorpCtrRel_Info_Result422" type="com.dhcc.xml.ent.entity.credit.db.Eb_CorpCtrRel_Info">
+		<result column="BrerType" property="BrerType" />
+		<result column="CertRelName" property="CertRelName" />
+		<result column="CertRelIDType" property="CertRelIDType" />
+		<result column="CertRelIDNum" property="CertRelIDNum" />
+	</resultMap>
+
+	<sql id="Eb_AcctMdf_Info_Columns422">
+	    <![CDATA[
+		     T1.Record_Id,
+		     T1.InfRecType,
+		     T1.ModRecCode,
+		     T1.RptDate,
+		     T1.MdfcSgmtCode,
+	         T2.InfRecType, 
+	         T2.ContractCode, 
+	         T2.RptDate, 
+	         T2.RptDateCode,
+   			 T2.Name, 
+   			 T2.IDType, 
+   			 T2.IDNum, 
+   			 T2.MngmtOrgCode,
+   			 T2.CreditLimType, 
+   			 T2.LimLoopFlg, 
+   			 ROUND(T2.CreditLim) AS CreditLim, 
+   			 T2.Cy,
+		     T2.ConEffDate, 
+		     T2.ConExpDate, 
+		     T2.ConStatus,
+		     ROUND(T2.CreditRest) AS CreditRest,
+			 T2.CreditRestCode,
+			 T3.BrerType, 
+			 T3.CertRelName, 
+			 T3.CertRelIDType, 
+			 T3.CertRelIDNum
+		]]>
+	</sql>
+	
+	<sql id="Eb_AcctMdf_info_select_where422">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<select id="EnCtrctInfMdfcJob_selectAllInfo" resultMap="Eb_AcctMdf_Info_Result422">
+		SELECT <include refid="Eb_AcctMdf_Info_Columns422" /> FROM EB_ACCTMDF_INFO T1
+		LEFT JOIN EM_CORPCTR_INFO T2 ON (T1.MODRECCODE = T2.RECORD_ID AND T1.MDFCSGMTCODE IN('B','D'))
+		LEFT JOIN EM_CORPCTRREL_INFO T3 ON (T1.MODRECCODE = T3.MAIN_ID AND T1.MDFCSGMTCODE = 'C') 
+		WHERE T1.INFRECTYPE = '422'
+		<include refid="Eb_AcctMdf_info_select_where422"/>
+	</select>
+
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnCtrctInfMdfcJob_updatePageNumber">
+		UPDATE EB_ACCTMDF_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '422'
+		<include refid="Eb_AcctMdf_info_select_where422" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnCtrctInfMdfcJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_ACCTMDF_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '422'
+		<include refid="Eb_AcctMdf_info_select_where422" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnCtrctInfMdfcJob_updateCheckSts">
+		UPDATE EB_ACCTMDF_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '422'
+		<include refid="Eb_AcctMdf_info_select_where422" />
+	</update>
+	<delete id="EnCtrctInfMdfcJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_ACCTMDF_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '422'
+		<include refid="Eb_AcctMdf_info_select_where422" />
+		)
+	</delete>
+
+</mapper>

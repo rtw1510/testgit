@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-MotgaCltalCtrctInfMapper">
+	<resultMap id="Pb_Guacct_Info_Result510" type="com.dhcc.xml.per.entity.motgacltalctrctinfo.db.Pb_Guacct_Info">
+		<result column="Record_Id" property="Record_Id"/>
+		<result column="InfRecType" property="InfRecType"   />
+		<result column="CcCode" property="CcCode"   />
+		<result column="RptDate" property="RptDate"   />
+		<result column="RptDateCode" property="RptDateCode"   />
+		<result column="InfoIDType" property="InfoIDType"   />
+		<result column="Name" property="Name"   />
+		<result column="CertType" property="CertType"   />
+		<result column="CertNum" property="CertNum"   />
+		<result column="MngmtOrgCode" property="MngmtOrgCode"   />
+		<result column="GuarType" property="GuarType"   />
+		<result column="CcAmt" property="CcAmt"   />
+		<result column="Cy" property="Cy"   />
+		<result column="CcValDate" property="CcValDate"   />
+		<result column="CcExpDate" property="CcExpDate"   />
+		<result column="MaxGuar" property="MaxGuar"   />
+		<result column="CcStatus" property="CcStatus"   />
+		
+		<result column="GUACCTBASEINFO_FLAG" property="GUACCTBASEINFO_FLAG"   />
+		<result column="GUACCTRLT_FLAG" property="GUACCTRLT_FLAG"   />
+		<result column="GUACCTPLE_FLAG" property="GUACCTPLE_FLAG"   />
+		<result column="GUACCTIMP_FLAG" property="GUACCTIMP_FLAG"   />
+
+		<collection property="Pb_GuacctRlt_Info_List" resultMap="Pb_GuacctRlt_Info_Result510"></collection>
+		<collection property="Pb_GuacctPle_Info_List" resultMap="Pb_GuacctPle_Info_Result510"></collection>
+
+		<collection property="Pb_GuacctImp_Info_List" resultMap="Pb_GuacctImp_Info_Result510"></collection>
+
+	</resultMap>
+
+	<resultMap id="Pb_GuacctRlt_Info_Result510" type="com.dhcc.xml.per.entity.motgacltalctrctinfo.db.Pb_GuacctRlt_Info" >
+		<result column="InfoIDType" property="InfoIDType"   />
+		<result column="GuarName" property="GuarName"   />
+		<result column="GuarCertType" property="GuarCertType"   />
+		<result column="GuarCertNum" property="GuarCertNum"   />
+	</resultMap>
+	
+	<resultMap id="Pb_GuacctPle_Info_Result510" type="com.dhcc.xml.per.entity.motgacltalctrctinfo.db.Pb_GuacctPle_Info">
+		<result column="PleType" property="PleType"   />
+		<result column="MotgaProptIDType" property="MotgaProptIDType"   />
+		<result column="PleCertID" property="PleCertID"   />
+		<result column="PleDistr" property="PleDistr"   />
+		<result column="PleValue" property="PleValue"   />
+		<result column="ValOrgType" property="ValOrgType"   />
+		<result column="ValDate" property="ValDate"   />
+		<result column="PledgorType" property="PledgorType"   />
+		<result column="PledgorName" property="PledgorName"   />
+		<result column="PleorCertType" property="PleorCertType"   />
+		<result column="PleorCertNum" property="PleorCertNum"   />
+		<result column="PleDesc" property="PleDesc"   />
+		<result column="PleCy" property="PleCy"   />
+	</resultMap>
+	
+	<resultMap id="Pb_GuacctImp_Info_Result510" type="com.dhcc.xml.per.entity.motgacltalctrctinfo.db.Pb_GuacctImp_Info">
+		<result column="ImpType" property="ImpType"   />
+		<result column="ImpVal" property="ImpVal"   />
+		<result column="ImpCy" property="ImpCy"   />
+		<result column="Ippc" property="Ippc"   />
+		<result column="PawnName" property="PawnName"   />
+		<result column="PawnCertType" property="PawnCertType"   />
+		<result column="PawnCertNum" property="PawnCertNum"   />
+	</resultMap>
+	<sql id="Pb_Guacct_Info_Columns">
+			<![CDATA[
+				T1.Record_Id,
+				T1.InfRecType,
+				T1.CcCode,
+				T1.RptDate,
+				T1.RptDateCode,
+				T1.InfoIDType,
+				T1.Name,
+				T1.CertType,
+				T1.CertNum,
+				T1.MngmtOrgCode,
+				T1.GuarType,
+				ROUND(T1.CcAmt) AS CcAmt,
+				T1.Cy,
+				T1.CcValDate,
+				T1.CcExpDate,
+				T1.MaxGuar,
+				T1.CcStatus,
+				T1.GUACCTBASEINFO_FLAG,
+				T1.GUACCTRLT_FLAG,
+				T1.GUACCTPLE_FLAG,
+				T1.GUACCTIMP_FLAG,
+				T2.InfoIDType,
+				T2.GuarName,
+				T2.GuarCertType,
+				T2.GuarCertNum,
+				T3.PleType, 
+			    T3.MotgaProptIDType, 
+			    T3.PleCertID, 
+			    T3.PleDistr,
+	   			ROUND(T3.PleValue) AS PleValue, 
+	   			T3.PleCy,
+	   			T3.ValOrgType, 
+	   			T3.ValDate, 
+	   			T3.PledgorType, 
+	   			T3.PledgorName, 
+	   			T3.PleorCertType,
+			    T3.PleorCertNum, 
+			    T3.PleDesc,
+				T4.ImpType, 
+				ROUND(T4.ImpVal) AS ImpVal,
+				T4.ImpCy,
+				T4.Ippc,
+				T4.PawnName,
+				T4.PawnCertType,
+				T4.PawnCertNum
+			]]>
+	</sql>
+
+	<sql id="Pb_Guacct_info_select_where">
+		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A,PB_LNACCTMOT_INFO C WHERE A.BS_KEY_DATA=C.ACCTCODE AND T1.CCCODE=C.CCC AND A.STS='1')
+ 		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<select id="PerMotgaCltalCtrctInfJob_selectAllInfo" resultMap="Pb_Guacct_Info_Result510">
+		SELECT <include refid="Pb_Guacct_Info_Columns" /> FROM PB_GUACCT_INFO T1
+		LEFT JOIN PB_GUACCTRLT_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.GUACCTRLT_FLAG = '1')
+		LEFT JOIN PB_GUACCTPLE_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.GUACCTPLE_FLAG = '1')
+		LEFT JOIN PB_GUACCTIMP_INFO T4 ON (T1.RECORD_ID = T4.MAIN_ID AND T1.GUACCTIMP_FLAG = '1')
+		WHERE T1.INFRECTYPE = '510'
+		<include refid="Pb_Guacct_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="PerMotgaCltalCtrctInfJob_updatePageNumber">
+		UPDATE PB_GUACCT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '510'
+		<include refid="Pb_Guacct_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="PerMotgaCltalCtrctInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_GUACCT_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '510'
+		<include refid="Pb_Guacct_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="PerMotgaCltalCtrctInfJob_updateCheckSts">
+		UPDATE PB_GUACCT_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '510'
+		<include refid="Pb_Guacct_info_select_where" />
+	</update>
+	<delete id="PerMotgaCltalCtrctInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM PB_GUACCT_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '510'
+		<include refid="Pb_Guacct_info_select_where" />
+		)
+	</delete>
+
+</mapper>

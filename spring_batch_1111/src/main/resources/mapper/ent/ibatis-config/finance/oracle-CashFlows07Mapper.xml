@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-CashFlows07Mapper">
+	<resultMap id="EB_FinaCsh07_Info_Result" type="com.dhcc.xml.ent.entity.finance.db.EB_FinaCsh07_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="EntName" property="EntName" />
+		<result column="EntCertType" property="EntCertType" />
+		<result column="EntCertNum" property="EntCertNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="SheetYear" property="SheetYear" />
+		<result column="SheetType" property="SheetType" />
+		<result column="SheetTypeDivide" property="SheetTypeDivide" />
+		<result column="AuditFirmName" property="AuditFirmName" />
+		<result column="AuditorName" property="AuditorName" />
+		<result column="AuditTime" property="AuditTime" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="CashReceivedFromSalesOGOROS" property="CashReceivedFromSalesOfGoodsOrRendingOfServices" />
+		<result column="TaxRefunds" property="TaxRefunds" />
+		<result column="OtherCashReceivedRelatingToOA" property="OtherCashReceivedRelatingToOperatingActivities" />
+		<result column="TotalCashInflowsFromOperatingA" property="TotalCashInflowsFromOperatingActivities" />
+		<result column="CashPaidForGoodsAndServices" property="CashPaidForGoodsAndServices" />
+		<result column="CashPaidToAndOnBehalfOfE" property="CashPaidToAndOnBehalfOfEmployees" />
+		<result column="PaymentsOfAllTypesOfTaxes" property="PaymentsOfAllTypesOfTaxes" />
+		<result column="OtherCashPaymentsFromOA" property="OtherCashPaymentsFromOperatingActivities" />
+		<result column="TotalCashOutflowsFromOA" property="TotalCashOutflowsFromOperatingActivities" />
+		<result column="NetCashFlowsFromOperatingA" property="NetCashFlowsFromOperatingActivities" />
+		<result column="CashReceivedFromReturnOfI" property="CashReceivedFromReturnOfInvestment" />
+		<result column="CashReceivedFromOnvestments" property="CashReceivedFromOnvestments" />
+		<result column="NetCashReceivedFromDOFAIAAOLTA" property="NetCashReceivedFromDisposalOfFixedAssetsIntangibleAssetsAndOtherLongTermAssets" />
+		<result column="NetCashInflowsOfDOSAOBE" property="NetCashInflowsOfDisposalOfSubsidiariesAndOtherBusinessEntities" />
+		<result column="CashReceivedRelatingToOtherIA" property="CashReceivedRelatingToOtherInvestingActivities" />
+		<result column="TotalCashInflowsFromInvestingA" property="TotalCashInflowsFromInvestingActivities" />
+		<result column="CashPaidToAcquireFixedAIAAOLTA" property="CashPaidToAcquireFixedAssetsIntangibleAssetsAndOtherLongTermAssents" />
+		<result column="CashPaymentsForInvestments" property="CashPaymentsForInvestments" />
+		<result column="NetCashOutflowsOfPOSAOBU" property="NetCashOutflowsOfProcurementOfSubsidiariesAndOtherBusinessUnits" />
+		<result column="CashPaymentsRelatedToOtherIA" property="CashPaymentsRelatedToOtherInvestingActivities" />
+		<result column="SubTotalOfCashOutflows" property="SubTotalOfCashOutflows" />
+		<result column="NetCashFlowsFromInvestingA" property="NetCashFlowsFromInvestingActivities" />
+		<result column="CashReceivedFromInvestors" property="CashReceivedFromInvestors" />
+		<result column="CashFromBorrowings" property="CashFromBorrowings" />
+		<result column="OtherCashReceivedRelatingToFA" property="OtherCashReceivedRelatingToFinancingActivities" />
+		<result column="TotalCashInflowsFromFinancingA" property="TotalCashInflowsFromFinancingActivities" />
+		<result column="CashRepaymentsForDebts" property="CashRepaymentsForDebts" />
+		<result column="CashPaymentsForDODOPAIE" property="CashPaymentsForDistributionOfDividendsOrProfitAndInterestExpenses" />
+		<result column="CashPaymentsRelatedToOtherFA" property="CashPaymentsRelatedToOtherFinancingActivities" />
+		<result column="TotalCashOutflowsFromFA" property="TotalCashOutflowsFromFinancingActivities" />
+		<result column="NetCashFlowsFromFinancingA" property="NetCashFlowsFromFinancingActivities" />
+		<result column="EffectOfExchangRateChangesOC" property="EffectOfExchangRateChangesOnCash" />
+		<result column="NetIncreaseInCashAndCashE" property="NetIncreaseInCashAndCashEquivalents" />
+		<result column="InitialCashAndCashEB" property="InitialCashAndCashEquivalentsBalance" />
+		<result column="TheFinalCashAndCashEB" property="TheFinalCashAndCashEquivalentsBalance" />
+		<result column="NetProfit" property="NetProfit" />
+		<result column="ProvisionForAssetImpairment" property="ProvisionForAssetImpairment" />
+		<result column="DepreciationOfFixedAssets" property="DepreciationOfFixedAssets" />
+		<result column="AmortisationOfIntangibleAssets" property="AmortisationOfIntangibleAssets" />
+		<result column="AmortisationOfLongTermDE" property="AmortisationOfLongTermDefferedExpenses" />
+		<result column="DecreaseOfDefferedExpenses" property="DecreaseOfDefferedExpenses" />
+		<result column="AdditionOfAccuedExpense" property="AdditionOfAccuedExpense" />
+		<result column="LossesOnDisposalOfFAIAAOLTA" property="LossesOnDisposalOfFixedAssetsIntangibleAssetsAndOtherLongTermAssets" />
+		<result column="LossesOnScrappingOfFixedAssets" property="LossesOnScrappingOfFixedAssets" />
+		<result column="ProfitOrLossFromChangesInFairV" property="ProfitOrLossFromChangesInFairValue" />
+		<result column="FinanceExpense" property="FinanceExpense" />
+		<result column="LossesArsingFromInvestment" property="LossesArsingFromInvestment" />
+		<result column="DeferredIncomeTaxAssets" property="DeferredIncomeTaxAssets" />
+		<result column="DeferredIncomeTaxLiabilities" property="DeferredIncomeTaxLiabilities" />
+		<result column="DecreaseInInventories" property="DecreaseInInventories" />
+		<result column="DecreaseInOperatingReceivables" property="DecreaseInOperatingReceivables" />
+		<result column="IncreaseInOperatingReceivables" property="IncreaseInOperatingReceivables" />
+		<result column="Others" property="Others" />
+		<result column="NetCashFlowsFromOperatingA2" property="NetCashFlowsFromOperatingActivitiesMi" />
+		<result column="DebtsTransferToCapital" property="DebtsTransferToCapital" />
+		<result column="OneYearDueConvertibleBonds" property="OneYearDueConvertibleBonds" />
+		<result column="FinancingRentToTheFixedAsset" property="FinancingRentToTheFixedAsset" />
+		<result column="NonCashOthers" property="NonCashOthers" />
+		<result column="CashAtTheEndOfPeriod" property="CashAtTheEndOfPeriod" />
+		<result column="CashAtTheBeginningOfThePeriod" property="CashAtTheBeginningOfThePeriod" />
+		<result column="CashEquivalentsAtTheEndOfTheP" property="CashEquivalentsAtTheEndOfThePeriod" />
+		<result column="CashEquivalentsAtTheBOTP" property="CashEquivalentsAtTheBeginningOfThePeriod" />
+		<result column="NetIncreaseInCashAndCashE2" property="NetIncreaseInCashAndCashEquivalentsMi" />
+	</resultMap>
+	
+	<sql id="Eb_FinaCsh07_Info_Columns">
+		<![CDATA[
+			InfRecType,
+			EntName,
+			EntCertType,
+			EntCertNum,
+			RptDate,
+			SheetYear,
+			SheetType,
+			SheetTypeDivide,
+			AuditFirmName,
+			AuditorName,
+			AuditTime,
+			Cimoc,
+			RptDateCode,
+			to_char(CashReceivedFromSalesOGOROS,'FM99999999999999990.90') CashReceivedFromSalesOGOROS,
+			to_char(TaxRefunds,'FM99999999999999990.90') TaxRefunds,
+			to_char(OtherCashReceivedRelatingToOA,'FM99999999999999990.90') OtherCashReceivedRelatingToOA,
+			to_char(TotalCashInflowsFromOperatingA,'FM99999999999999990.90') TotalCashInflowsFromOperatingA,
+			to_char(CashPaidForGoodsAndServices,'FM99999999999999990.90') CashPaidForGoodsAndServices,
+			to_char(CashPaidToAndOnBehalfOfE,'FM99999999999999990.90') CashPaidToAndOnBehalfOfE,
+			to_char(PaymentsOfAllTypesOfTaxes,'FM99999999999999990.90') PaymentsOfAllTypesOfTaxes,
+			to_char(OtherCashPaymentsFromOA,'FM99999999999999990.90') OtherCashPaymentsFromOA,
+			to_char(TotalCashOutflowsFromOA,'FM99999999999999990.90') TotalCashOutflowsFromOA,
+			to_char(NetCashFlowsFromOperatingA,'FM99999999999999990.90') NetCashFlowsFromOperatingA,
+			to_char(CashReceivedFromReturnOfI,'FM99999999999999990.90') CashReceivedFromReturnOfI,
+			to_char(CashReceivedFromOnvestments,'FM99999999999999990.90') CashReceivedFromOnvestments,
+			to_char(NetCashReceivedFromDOFAIAAOLTA,'FM99999999999999990.90') NetCashReceivedFromDOFAIAAOLTA,
+			to_char(NetCashInflowsOfDOSAOBE,'FM99999999999999990.90') NetCashInflowsOfDOSAOBE,
+			to_char(CashReceivedRelatingToOtherIA,'FM99999999999999990.90') CashReceivedRelatingToOtherIA,
+			to_char(TotalCashInflowsFromInvestingA,'FM99999999999999990.90') TotalCashInflowsFromInvestingA,
+			to_char(CashPaidToAcquireFixedAIAAOLTA,'FM99999999999999990.90') CashPaidToAcquireFixedAIAAOLTA,
+			to_char(CashPaymentsForInvestments,'FM99999999999999990.90') CashPaymentsForInvestments,
+			to_char(NetCashOutflowsOfPOSAOBU,'FM99999999999999990.90') NetCashOutflowsOfPOSAOBU,
+			to_char(CashPaymentsRelatedToOtherIA,'FM99999999999999990.90') CashPaymentsRelatedToOtherIA,
+			to_char(SubTotalOfCashOutflows,'FM99999999999999990.90') SubTotalOfCashOutflows,
+			to_char(NetCashFlowsFromInvestingA,'FM99999999999999990.90') NetCashFlowsFromInvestingA,
+			to_char(CashReceivedFromInvestors,'FM99999999999999990.90') CashReceivedFromInvestors,
+			to_char(CashFromBorrowings,'FM99999999999999990.90') CashFromBorrowings,
+			to_char(OtherCashReceivedRelatingToFA,'FM99999999999999990.90') OtherCashReceivedRelatingToFA,
+			to_char(TotalCashInflowsFromFinancingA,'FM99999999999999990.90') TotalCashInflowsFromFinancingA,
+			to_char(CashRepaymentsForDebts,'FM99999999999999990.90') CashRepaymentsForDebts,
+			to_char(CashPaymentsForDODOPAIE,'FM99999999999999990.90') CashPaymentsForDODOPAIE,
+			to_char(CashPaymentsRelatedToOtherFA,'FM99999999999999990.90') CashPaymentsRelatedToOtherFA,
+			to_char(TotalCashOutflowsFromFA,'FM99999999999999990.90') TotalCashOutflowsFromFA,
+			to_char(NetCashFlowsFromFinancingA,'FM99999999999999990.90') NetCashFlowsFromFinancingA,
+			to_char(EffectOfExchangRateChangesOC,'FM99999999999999990.90') EffectOfExchangRateChangesOC,
+			to_char(NetIncreaseInCashAndCashE,'FM99999999999999990.90') NetIncreaseInCashAndCashE,
+			to_char(InitialCashAndCashEB,'FM99999999999999990.90') InitialCashAndCashEB,
+			to_char(TheFinalCashAndCashEB,'FM99999999999999990.90') TheFinalCashAndCashEB,
+			to_char(NetProfit,'FM99999999999999990.90') NetProfit,
+			to_char(ProvisionForAssetImpairment,'FM99999999999999990.90') ProvisionForAssetImpairment,
+			to_char(DepreciationOfFixedAssets,'FM99999999999999990.90') DepreciationOfFixedAssets,
+			to_char(AmortisationOfIntangibleAssets,'FM99999999999999990.90') AmortisationOfIntangibleAssets,
+			to_char(AmortisationOfLongTermDE,'FM99999999999999990.90') AmortisationOfLongTermDE,
+			to_char(DecreaseOfDefferedExpenses,'FM99999999999999990.90') DecreaseOfDefferedExpenses,
+			to_char(AdditionOfAccuedExpense,'FM99999999999999990.90') AdditionOfAccuedExpense,
+			to_char(LossesOnDisposalOfFAIAAOLTA,'FM99999999999999990.90') LossesOnDisposalOfFAIAAOLTA,
+			to_char(LossesOnScrappingOfFixedAssets,'FM99999999999999990.90') LossesOnScrappingOfFixedAssets,
+			to_char(ProfitOrLossFromChangesInFairV,'FM99999999999999990.90') ProfitOrLossFromChangesInFairV,
+			to_char(FinanceExpense,'FM99999999999999990.90') FinanceExpense,
+			to_char(LossesArsingFromInvestment,'FM99999999999999990.90') LossesArsingFromInvestment,
+			to_char(DeferredIncomeTaxAssets,'FM99999999999999990.90') DeferredIncomeTaxAssets,
+			to_char(DeferredIncomeTaxLiabilities,'FM99999999999999990.90') DeferredIncomeTaxLiabilities,
+			to_char(DecreaseInInventories,'FM99999999999999990.90') DecreaseInInventories,
+			to_char(DecreaseInOperatingReceivables,'FM99999999999999990.90') DecreaseInOperatingReceivables,
+			to_char(IncreaseInOperatingReceivables,'FM99999999999999990.90') IncreaseInOperatingReceivables,
+			to_char(Others,'FM99999999999999990.90') Others,
+			to_char(NetCashFlowsFromOperatingA2,'FM99999999999999990.90') NetCashFlowsFromOperatingA2,
+			to_char(DebtsTransferToCapital,'FM99999999999999990.90') DebtsTransferToCapital,
+			to_char(OneYearDueConvertibleBonds,'FM99999999999999990.90') OneYearDueConvertibleBonds,
+			to_char(FinancingRentToTheFixedAsset,'FM99999999999999990.90') FinancingRentToTheFixedAsset,
+			to_char(NonCashOthers,'FM99999999999999990.90') NonCashOthers,
+			to_char(CashAtTheEndOfPeriod,'FM99999999999999990.90') CashAtTheEndOfPeriod,
+			to_char(CashAtTheBeginningOfThePeriod,'FM99999999999999990.90') CashAtTheBeginningOfThePeriod,
+			to_char(CashEquivalentsAtTheEndOfTheP,'FM99999999999999990.90') CashEquivalentsAtTheEndOfTheP,
+			to_char(CashEquivalentsAtTheBOTP,'FM99999999999999990.90') CashEquivalentsAtTheBOTP,
+			to_char(NetIncreaseInCashAndCashE2,'FM99999999999999990.90') NetIncreaseInCashAndCashE2
+		]]>
+	</sql>
+	<!-- 机构关联限制 -->
+	<sql id="EB_FinaCsh07_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+
+	<!-- 读取数据 -->
+	<select id="CashFlows07Job_selectAllInfo" resultMap="EB_FinaCsh07_Info_Result">
+		SELECT <include refid="Eb_FinaCsh07_Info_Columns" /> FROM EB_FINACSH07_INFO T1
+		WHERE T1.INFRECTYPE = '630'
+		<include refid="EB_FinaCsh07_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="CashFlows07Job_updatePageNumber">
+		UPDATE EB_FINACSH07_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '630'
+		<include refid="EB_FinaCsh07_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="CashFlows07Job_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_FINACSH07_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '630'
+		<include refid="EB_FinaCsh07_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="CashFlows07Job_updateCheckSts">
+		UPDATE EB_FINACSH07_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '630'
+		<include refid="EB_FinaCsh07_info_select_where" />
+	</update>
+	<delete id="CashFlows07Job_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_FINACSH07_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '630'
+		<include refid="EB_FinaCsh07_info_select_where" />
+		)
+	</delete>
+
+</mapper>

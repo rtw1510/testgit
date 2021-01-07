@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BatchItem">
+	<resultMap id="RM_FbMessageInfo" type="com.dhcc.xml.parse.entity.FbMessageInfo">
+	    <result property="id" column="ID" />
+	    <result property="infrectype" column="INFRECTYPE" />
+	    <result property="fb_file_name" column="FB_FILE_NAME" />
+	    <result property="fb_file_path" column="FB_FILE_PATH" />
+	    <result property="fb_flag" column="FB_FLAG" />
+	    <result property="fb_version" column="FB_VERSION" />
+	    <result property="fb_time" column="FB_TIME" />
+	    <result property="fb_succ_num" column="FB_SUCC_NUM" />
+	    <result property="fb_err_num" column="FB_ERR_NUM" />
+	    <result property="br_no" column="BR_NO" />
+	  	<result property="oprr_no" column="OPRR_NO" />
+	  	<result property="upd_brno" column="UPD_BRNO" />
+	  	<result property="upd_oprrno" column="UPD_OPRRNO" />
+		<result property="tx_date" column="TX_DATE" /> 	
+		<result property="tx_time" column="TX_TIME" /> 
+		<result property="up_date" column="UP_DATE" /> 
+		<result property="up_time" column="UP_TIME" /> 
+		<result property="fb_file_sts" column="FB_FILE_STS" /> 
+		<result property="gen_file_name" column="GEN_FILE_NAME" /> 
+		<result property="file_type" column="FILE_TYPE" /> 
+    </resultMap>
+	
+	<sql id="FbMessageInfo_columns">
+        <![CDATA[
+	        ID,
+			INFRECTYPE,
+			FB_FILE_NAME,
+			FB_FILE_PATH,
+			FB_FLAG,
+			FB_VERSION,
+			FB_TIME,
+			FB_SUCC_NUM,
+			FB_ERR_NUM,
+			BR_NO,
+			OPRR_NO,
+			UPD_BRNO,
+			UPD_OPRRNO,
+			TX_DATE,
+			TX_TIME,
+			UP_DATE,
+			UP_TIME,
+			FB_FILE_STS,
+			GEN_FILE_NAME,
+			FILE_TYPE
+          ]]>
+    </sql>
+    
+	<update id="FbMessageInfo_updateFbMessageInfo">
+		UPDATE S_FBMSG_INFO SET 
+		FB_VERSION = #{fb_version},
+		FB_TIME = #{fb_time},
+		FB_SUCC_NUM = #{fb_succ_num},
+		FB_ERR_NUM = #{fb_err_num},
+		UP_DATE = #{up_date},
+		UP_TIME = #{tx_time},
+		FB_FILE_STS = #{fb_file_sts}
+		WHERE FB_FILE_NAME = #{fb_file_name}
+	</update>
+	
+	<update id="FbMessageInfo_updateFbFileSts">
+		UPDATE S_FBMSG_INFO SET 
+		FB_FILE_STS = #{fb_file_sts}
+		WHERE FB_FILE_NAME = #{fb_file_name}
+	</update>
+    
+    <sql id="FbMessageInfo_findByPage_where">
+		<where>
+			<if test="infrectype !='' and infrectype !=null">
+				and INFRECTYPE = #{infrectype}
+			</if>
+			<if test="fb_file_name !='' and fb_file_name !=null">
+				and FB_FILE_NAME like '%' #{fb_file_name} '%'
+			</if>
+			<if test="tx_date !='' and tx_date !=null">
+				and TX_DATE = #{tx_date}
+			</if>
+			<if test="fb_file_sts !='' and fb_file_sts !=null">
+				and FB_FILE_STS = #{fb_file_sts}
+			</if>
+			<if test="file_type !='' and file_type !=null">
+				and FILE_TYPE = #{file_type}
+			</if>
+		</where>
+    </sql>
+	
+	<select id="FbMessageInfo_getFbMessageInfo" resultMap="RM_FbMessageInfo">
+    	SELECT <include refid="FbMessageInfo_columns"/> FROM S_FBMSG_INFO
+     		 <include refid="FbMessageInfo_findByPage_where"/>
+    </select>
+    
+    <insert id="FbMessageInfo_insertVErrorInfo" parameterType="java.util.Map">
+    	INSERT INTO V_ERROR_INFO(
+			ID,
+			INFRECTYPE,
+			ERR_KEYS,
+			ERR_KEYS_DESC,
+			FB_FILE_NAME,
+			FBCODE,
+			FBMSG,
+			ERR_TYPE,
+			ERR_TYPE_DETAIL,
+			CRI_TYPE,
+			RECORD_ID,
+			TX_DATE,
+			DATA_STS,
+			CONFIRM_STS
+			) 
+		<iterate property="VErrorInfoList" conjunction="UNION ALL">
+			SELECT
+            GET_SEQ_NEXT('V_ERROR_INFO_SEQ'),
+            #VErrorInfoList[].infrectype#,
+            #VErrorInfoList[].err_keys#,
+            #VErrorInfoList[].err_keys_desc#,
+            #VErrorInfoList[].fb_file_name#,
+            #VErrorInfoList[].fbcode#,
+            #VErrorInfoList[].fbmsg#,
+            #VErrorInfoList[].err_type#,
+            #VErrorInfoList[].err_type_detail#,
+            #VErrorInfoList[].cri_type#,
+            #VErrorInfoList[].record_id#,
+            #VErrorInfoList[].tx_date#,
+            #VErrorInfoList[].data_sts#,
+            #VErrorInfoList[].confirm_sts#
+            FROM DUAL
+		</iterate>
+    </insert>
+    <select id="FbMessageInfo_getTableName" resultType="java.lang.String" parameterType="java.util.HashMap">
+    	SELECT T1.REMARK FROM BATCH_JOB T1, S_MSG_INFO T2 WHERE T1.JOB_NAME = T2.JOB_NAME AND T2.GEN_FILE_NAME = #{genFileName}
+    </select>
+   
+    <update id="FbMessageInfo_updateDataMainTableSucc" parameterType="java.util.HashMap">
+   		UPDATE ${tableName} T1 SET T1.RPT_TYPE = '3' WHERE NOT EXISTS 
+   		(SELECT 1 FROM V_ERROR_INFO T2  WHERE SUBSTR(T1.FILENAME,0,29)=SUBSTR(T2.FB_FILE_NAME,0,29) AND T1.RECORD_ID = T2.RECORD_ID AND T1.RECORD_ID IS NOT NULL) AND T1.FILENAME = #{genFileName}
+    </update>
+    
+    <update id="FbMessageInfo_updateDataMainTableFail" parameterType="java.util.HashMap">
+   		UPDATE ${tableName} T1 SET T1.RPT_TYPE = '4' WHERE EXISTS 
+   		(SELECT 1 FROM V_ERROR_INFO T2 WHERE SUBSTR(T1.FILENAME,0,29)=SUBSTR(T2.FB_FILE_NAME,0,29) AND T1.RECORD_ID = T2.RECORD_ID AND T1.RECORD_ID IS NOT NULL) AND T1.FILENAME = #{genFileName}
+    </update>
+    
+    <update id="FbMessageInfo_updateDataSubTableSucc" parameterType="java.util.HashMap">
+   		UPDATE ${tableName} T1 SET T1.RPT_TYPE = '3' WHERE NOT EXISTS 
+   		(SELECT 1 FROM V_ERROR_INFO T2  WHERE SUBSTR(T1.FILENAME,0,29)=SUBSTR(T2.FB_FILE_NAME,0,29) AND T1.MAIN_ID = T2.RECORD_ID AND T1.MAIN_ID IS NOT NULL) AND T1.FILENAME = #{genFileName}
+    </update>
+    
+    <update id="FbMessageInfo_updateDataSubTableFail" parameterType="java.util.HashMap">
+   		UPDATE ${tableName} T1 SET T1.RPT_TYPE = '4' WHERE EXISTS 
+   		(SELECT 1 FROM V_ERROR_INFO T2 WHERE SUBSTR(T1.FILENAME,0,29)=SUBSTR(T2.FB_FILE_NAME,0,29) AND T1.MAIN_ID = T2.RECORD_ID AND T1.MAIN_ID IS NOT NULL) AND T1.FILENAME = #{genFileName}
+    </update>
+    
+    <update id="FbMessageInfo_updateErrorTable" parameterType="java.util.HashMap">
+   		UPDATE V_ERROR_INFO T1 SET (T1.CUST_NO,T1.RECORD_OPRR_NO,T1.RECORD_BRNO,T1.RECORD_BRNAME,T1.RECORD_ID,T1.MAIN_ID,T1.YUANID,T1.DATASOURCE)
+   		= (SELECT T2.CUST_NO,T2.OPRR_NO,T2.BR_NO,FUN_GETBRNAME_BRNO(T2.BR_NO),T2.RECORD_ID,T2.RECORD_ID,T2.ID,T2.DATASOURCE FROM ${tableName} T2 WHERE SUBSTR(T1.FB_FILE_NAME,0,29)=SUBSTR(T2.FILENAME,0,29) 
+   		AND T1.RECORD_ID = T2.RECORD_ID AND T1.RECORD_ID IS NOT NULL) WHERE T1.FB_FILE_NAME = #{fbFileName}
+   		AND EXISTS (SELECT 1 FROM ${tableName} T3 WHERE SUBSTR(T1.FB_FILE_NAME,0,29)=SUBSTR(T3.FILENAME,0,29) 
+   		AND T1.RECORD_ID = T3.RECORD_ID AND T1.RECORD_ID IS NOT NULL)
+    </update>
+    <update id="FbMessageInfo_updateRuleCode" parameterType="java.util.HashMap">
+    	UPDATE V_ERROR_INFO T1 SET (T1.RULECODE,T1.RULEDESC)=
+		(SELECT T2.RULECODE,T2.RULEDESC FROM V_ERRORMAP_INFO T2 WHERE T1.FBCODE=T2.FBCODE AND T1.FBMSG = T2.FBMSG AND T1.INFRECTYPE = T2.INFRECTYPE) WHERE T1.FB_FILE_NAME = #{fbFileName}
+	</update>
+</mapper>

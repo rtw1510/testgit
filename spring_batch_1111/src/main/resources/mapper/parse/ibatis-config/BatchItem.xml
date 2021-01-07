@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+
+	<typeAlias alias="v_error_info" type="com.dhcc.xml.parse.entity.V_ERROR_INFO"/>
+	<typeAlias alias="Pb_CustBase_Info" type="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBase_Info"/>
+	<insert id="BatchItem.insertFBErrorInfo">
+		<![CDATA[
+  			INSERT INTO V_ERROR_INFO(
+	  			ID,
+	  			CUST_NO,
+			   	INFRECTYPE,
+			   	ERR_KEYS,
+			   	ERR_KEYS_DESC,
+			   	FB_FILE_NAME,
+			    FBCODE,
+			    FBMSG,
+			    RULECODE,
+			    RULEDESC,
+			    ERR_TYPE,
+			    CRI_TYPE,
+			    RECORD_ID,
+			    RECORD_OPRR_NO,
+			    RECORD_BRNO,
+			    RECORD_BRNAME,
+			    TX_DATE,
+			    OPRR_NO,
+			    UP_DATE,
+			    UP_OPRR_NO,
+			    DATA_STS,
+			    CONFIRM_STS
+  			)VALUES(
+  				V_ERROR_INFO_SEQ.NEXTVAL,
+  				#cust_no#,
+			    #infrectype#,
+			    #err_keys#,
+			    #err_keys_desc#,
+			    #fb_file_name#,
+			    #fbcode#,
+			    #fbmsg#,
+			    #rulecode#,
+			    #ruledesc#,
+			    #err_type#,
+			    #cri_type#,
+			    #record_id#,
+			    #record_oprr_no#,
+			    #record_brno#,
+			    #record_brname#,
+			    #tx_date#,
+			    #oprr_no#,
+			    #up_date#,
+			    #up_oprr_no#,
+			    #data_sts#,
+			    #confirm_sts#
+  			)
+ 		]]> 
+	</insert>
+	<select id="Eb_custbase_info.select" resultClass="java.lang.String">
+	select BR_NO from Eb_custbase_info where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	
+	
+	<!--110 110个人基本信息-->
+	<select id="pb_custbase_info.select" resultClass="java.lang.String" parameterClass="java.util.HashMap">
+	select BR_NO from pb_custbase_info where record_id=#record_id# and FILENAME=#filename# 
+	</select>
+	<update id="updatePbCustBaseInfo.update" parameterClass="java.util.HashMap">
+	update pb_custbase_info set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustBaseInfoh.update" parameterClass="java.util.Map">
+	update ph_custbase_info set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustBaseInfo1.update" parameterClass="java.util.HashMap">
+	<![CDATA[
+	update pb_custbase_info set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbCustBaseInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update ph_custbase_info set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	
+	<!-- 114个人基本信息整笔删除 -->
+	<select id="selectPbCustDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_CUSTDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbCustDLTInfo.update" parameterClass="java.util.Map">
+	update PB_CUSTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustDLTInfoh.update" parameterClass="java.util.Map">
+	update Ph_CUSTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_CUSTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbCustDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_CUSTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!-- 120家族关系信息 -->
+	<select id="selectPbCustFamInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_CUSTFAM_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbCustFamInfo.update" parameterClass="java.util.Map">
+	update PB_CUSTFAM_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustFamInfoh.update" parameterClass="java.util.Map">
+	update Ph_CUSTFAM_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustFamInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_CUSTFAM_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbCustFamInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_CUSTFAM_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!-- 130个人证件有效期信息 -->
+	<select id="selectPbCustCtfFltgInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_CUSTCTFLTG_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbCustCtfFltgInfo.update" parameterClass="java.util.Map">
+	update PB_CUSTCTFLTG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustCtfFltgInfoh.update" parameterClass="java.util.Map">
+	update Ph_CUSTCTFLTG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustCtfFltgInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_CUSTCTFLTG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbCustCtfFltgInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_CUSTCTFLTG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 140个人证件整合信息记录 -->
+	<select id="selectPbCustDefctInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_CUSTDEFCT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbCustDefctInfo.update" parameterClass="java.util.Map">
+	update PB_CUSTDEFCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbCustDefctInfoh.update" parameterClass="java.util.Map">
+	update Ph_CUSTDEFCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updatePbCustDefctInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_CUSTDEFCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbCustDefctInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_CUSTDEFCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	
+	<!-- 210个人借贷账户信息记录 -->
+	<select id="selectPbLnacctInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_LNACCT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbLnacctInfo.update" parameterClass="java.util.Map">
+	update PB_LNACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnacctInfoh.update" parameterClass="java.util.Map">
+	update Ph_LNACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnacctInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_LNACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbLnacctInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_LNACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 211 个人借贷账户标识变更请求记录  221  231 -->
+	<select id="selectPbAcctChgInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_ACCTCHG_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbAcctChgInfo.update" parameterClass="java.util.Map">
+	update PB_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctChgInfoh.update" parameterClass="java.util.Map">
+	update Ph_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctChgInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<update id="updatePbAcctChgInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	
+		<!-- 212 个人借贷账户标识变更请求记录  232 -->
+	<select id="selectPbAcctMdfInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_ACCTMDF_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbAcctMdfInfo.update" parameterClass="java.util.Map">
+	update PB_ACCTMDF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctMdfInfoh.update" parameterClass="java.util.Map">
+	update Ph_ACCTMDF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctMdfInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_ACCTMDF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbAcctMdfInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_ACCTMDF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	
+	<!-- 213 个人借贷账户标识变更请求记录  223   233 -->
+	<select id="selectPbAcctDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_ACCTDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbAcctDLTInfo.update" parameterClass="java.util.Map">
+	update PB_ACCTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctDLTInfoh.update" parameterClass="java.util.Map">
+	update Ph_ACCTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_ACCTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbAcctDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_ACCTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 214 个人借贷账户整笔删除请求记录   224 234 -->
+	<select id="selectPbAcctAllDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_ACCTALLDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbAcctAllDLTInfo.update" parameterClass="java.util.Map">
+	update PB_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctAllDLTInfoh.update" parameterClass="java.util.Map">
+	update Ph_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbAcctAllDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbAcctAllDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 215 个人借贷账户特殊事件说明记录 -->
+	<select id="selectPbLnspcEvtInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_LNSPCEVT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbLnspcEvtInfo.update" parameterClass="java.util.Map">
+	update PB_LNSPCEVT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnspcEvtInfoh.update" parameterClass="java.util.Map">
+	update Ph_LNSPCEVT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnspcEvtInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_LNSPCEVT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbLnspcEvtInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_LNSPCEVT_INFO set RPT_TYPE=3 where record_id <>#record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	
+	
+	<!-- 220 个人授信协议信息记录-->
+	<select id="selectPbLnctrctBaseInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_LNCTRCTBASE_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbLnctrctBaseInfo.update" parameterClass="java.util.Map">
+	update PB_LNCTRCTBASE_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnctrctBaseInfoh.update" parameterClass="java.util.Map">
+	update Ph_LNCTRCTBASE_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnctrctBaseInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_LNCTRCTBASE_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbLnctrctBaseInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_LNCTRCTBASE_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 230 个人担保账户信息记录-->
+	<select id="selectPbLnsecAcctInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from PB_LNSECACCT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updatePbLnsecAcctInfo.update" parameterClass="java.util.Map">
+	update PB_LNSECACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnsecAcctInfoh.update" parameterClass="java.util.Map">
+	update Ph_LNSECACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updatePbLnsecAcctInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update PB_LNSECACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updatePbLnsecAcctInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Ph_LNSECACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!--310 企业基本信息记录 -->
+	<select id="selectEbCustBaseInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CUSTBASE_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCustBaseInfo.update" parameterClass="java.util.Map">
+	update EB_CUSTBASE_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCustBaseInfoh.update" parameterClass="java.util.Map">
+	update Eh_CUSTBASE_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCustBaseInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CUSTBASE_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCustBaseInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CUSTBASE_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!--314 企业基本信息整笔删除请求记录-->
+	<select id="selectEbCustDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CUSTDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCustDLTInfo.update" parameterClass="java.util.Map">
+	update EB_CUSTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCustDLTInfoh.update" parameterClass="java.util.Map">
+	update Eh_CUSTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCustDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CUSTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCustDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CUSTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!--340  企业身份标识整合信息记录-->
+	<select id="selectEbCustCtfInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CUSTCTF_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCustCtfInfo.update" parameterClass="java.util.Map">
+	update EB_CUSTCTF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCustCtfInfoh.update" parameterClass="java.util.Map">
+	update Eh_CUSTCTF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCustCtfInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CUSTCTF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCustCtfInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CUSTCTF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--350  企业间关联关系信息记录-->
+	<select id="selectEbCustRltInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CUSTRLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCustRltInfo.update" parameterClass="java.util.Map">
+	update EB_CUSTRLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCustRltInfoh.update" parameterClass="java.util.Map">
+	update Eh_CUSTRLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCustRltInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CUSTRLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCustRltInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CUSTRLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--410  企业借贷账户记录-->
+	<select id="selectEbCorpAcctInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CORPACCT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCorpAcctInfo.update" parameterClass="java.util.Map">
+	update EB_CORPACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCorpAcctInfoh.update" parameterClass="java.util.Map">
+	update Eh_CORPACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCorpAcctInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CORPACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCorpAcctInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CORPACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--411  企业借贷账户标识变更请求记录 421 441-->
+	<select id="selectEbAcctChgInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_ACCTCHG_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbAcctChgInfo.update" parameterClass="java.util.Map">
+	update EB_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbAcctChgInfoh.update" parameterClass="java.util.Map">
+	update Eh_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbAcctChgInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbAcctChgInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--412    企业借贷账户更正请求记录 422 442-->
+	<select id="selectEbAcctMdfInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_ACCTMDF_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbAcctMdfInfo.update" parameterClass="java.util.Map">
+	update EB_ACCTMDF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbAcctMdfInfoh.update" parameterClass="java.util.Map">
+	update Eh_ACCTMDF_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbAcctMdfInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_ACCTMDF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbAcctMdfInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_ACCTMDF_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--413    企业借贷账户按段删除请求记录 423 443-->
+	<select id="selectEbAcctDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_ACCTDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbAcctDLTInfo.update" parameterClass="java.util.Map">
+	update EB_ACCTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbAcctDLTInfoh.update" parameterClass="java.util.Map">
+	update EH_ACCTDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbAcctDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_ACCTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbAcctDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EH_ACCTDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!-- 414    企业借贷账户整笔删除请求记录 424 444-->
+	<select id="selectEbAcctAllDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_ACCTALLDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbAcctAllDLTInfo.update" parameterClass="java.util.Map">
+	update EB_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbAcctAllDLTInfoh.update" parameterClass="java.util.Map">
+	update Eh_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbAcctAllDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbAcctAllDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	<!-- 420    企业授信协议信息记录-->
+	<select id="selectEbCorpCtrInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_CORPCTR_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbCorpCtrInfo.update" parameterClass="java.util.Map">
+	update EB_CORPCTR_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbCorpCtrInfoh.update" parameterClass="java.util.Map">
+	update Eh_CORPCTR_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbCorpCtrInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_CORPCTR_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbCorpCtrInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_CORPCTR_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 440    企业担保交易信息相关记录-->
+	<select id="selectEbGuArAccInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_GUARACC_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbGuArAccInfo.update" parameterClass="java.util.Map">
+	update EB_GUARACC_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbGuArAccInfoh.update" parameterClass="java.util.Map">
+	update Eh_GUARACC_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbGuArAccInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_GUARACC_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbGuArAccInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_GUARACC_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+		<!-- 510    抵（质）押合同信息记录-->
+		<!-- 个人-->
+	<select id="selectYpGuAcctInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YP_GUACCT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYpGuAcctInfo.update" parameterClass="java.util.Map">
+	update YP_GUACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYpGuAcctInfoh.update" parameterClass="java.util.Map">
+	update YPh_GUACCT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateYpGuAcctInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YP_GUACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYpGuAcctInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YPh_GUACCT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+		<!-- 企业-->
+	<select id="selectYpGuAcctImpInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YE_GUACCTIMP_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYpGuAcctImpInfo" parameterClass="java.util.Map">
+	update YE_GUACCTIMP_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYpGuAcctImpInfoh" parameterClass="java.util.Map">
+	update YEh_GUACCTIMP_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYpGuAcctImpInfo1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YE_GUACCTIMP_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYpGuAcctImpInfoh1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YEh_GUACCTIMP_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+	
+	<!-- 511   抵（质）押合同标识变更请求记录-->
+	<!-- 个人-->
+	<select id="selectYpAcctChgInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YP_ACCTCHG_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYpAcctChgInfo.update" parameterClass="java.util.Map">
+	update YP_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYpAcctChgInfoh.update" parameterClass="java.util.Map">
+	update YPh_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateYpAcctChgInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YP_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYpAcctChgInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YPh_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	
+		<!-- 企业-->
+	<select id="selectYeAcctChgInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YE_ACCTCHG_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYeAcctChgInfo" parameterClass="java.util.Map">
+	update YE_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYeAcctChgInfoh" parameterClass="java.util.Map">
+	update YEh_ACCTCHG_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYeAcctChgInfo1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YE_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYeAcctChgInfoh1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YEh_ACCTCHG_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+		
+	<!-- 514 抵（质）押合同整笔删除请求记录-->
+	<!-- 个人-->
+	<select id="selectYpAcctAllDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YP_ACCTALLDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYpAcctAllDLTInfo.update" parameterClass="java.util.Map">
+	update YP_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYpAcctAllDLTInfoh.update" parameterClass="java.util.Map">
+	update YPh_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateYpAcctAllDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YP_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYpAcctAllDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update YPh_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+		<!-- 企业-->
+	<select id="selectYeAcctAllDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from YE_ACCTALLDLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateYeAcctAllDLTInfo" parameterClass="java.util.Map">
+	update YE_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateYeAcctAllDLTInfoh" parameterClass="java.util.Map">
+	update YEh_ACCTALLDLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateYeAcctAllDLTInfo1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YE_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateYeAcctAllDLTInfoh1" parameterClass="java.util.Map">
+	<![CDATA[
+	update YEh_ACCTALLDLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 610  企业资产负债表信息记录-->
+	<!-- 02版-->
+	<select id="selectEbFinaBal02Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINABAL02_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaBal02Info.update" parameterClass="java.util.Map">
+	update EB_FINABAL02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaBal02Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINABAL02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaBal02Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINABAL02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaBal02Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINABAL02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 07版-->
+	<select id="selectEbFinaBal07Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINABAL07_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaBal07Info.update" parameterClass="java.util.Map">
+	update EB_FINABAL07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaBal07Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINABAL07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaBal07Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINABAL07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaBal07Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINABAL07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 620  企业利润及利润分配表信息记录 -->
+	<!-- 02版-->
+		<select id="selectEbFinaPro02Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINAPRO02_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaPro02Info.update" parameterClass="java.util.Map">
+	update EB_FINAPRO02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaPro02Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINAPRO02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaPro02Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINAPRO02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaPro02Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINAPRO02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 07版-->
+	<select id="selectEbFinaPro07Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINAPRO07_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaPro07Info.update" parameterClass="java.util.Map">
+	update EB_FINAPRO07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaPro07Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINAPRO07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaPro07Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINAPRO07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaPro07Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINAPRO07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 630  企业现金流量表信息记录 -->
+	<!-- 02版-->
+	<select id="selectEbFinaCsh02Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINACSH02_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaCsh02Info.update" parameterClass="java.util.Map">
+	update EB_FINACSH02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaCsh02Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINACSH02_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaCsh02Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINACSH02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaCsh02Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINACSH02_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 07版-->
+	<select id="selectEbFinaCsh07Info.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINACSH07_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaCsh07Info.update" parameterClass="java.util.Map">
+	update EB_FINACSH07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaCsh07Infoh.update" parameterClass="java.util.Map">
+	update Eh_FINACSH07_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaCsh07Info1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINACSH07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaCsh07Infoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINACSH07_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!-- 640  事业单位资产负债表信息记录 -->
+	<select id="selectEbFinaInsbalInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINAINSBAL_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaInsbalInfo.update" parameterClass="java.util.Map">
+	update EB_FINAINSBAL_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaInsbalInfoh.update" parameterClass="java.util.Map">
+	update Eh_FINAINSBAL_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaInsbalInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINAINSBAL_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaInsbalInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINAINSBAL_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--650  事业单位收入支出表信息记录 -->
+	<select id="selectEbFinaIncexpInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINAINCEXP_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbFinaIncexpInfo.update" parameterClass="java.util.Map">
+	update EB_FINAINCEXP_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbFinaIncexpInfoh.update" parameterClass="java.util.Map">
+	update Eh_FINAINCEXP_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbFinaIncexpInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINAINCEXP_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbFinaIncexpInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINAINCEXP_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<!--614  企业资产负债表整笔删除请求记录 -->
+	<select id="selectEbNaDLTInfo.select" resultClass="java.lang.String" parameterClass="java.util.Map">
+	select BR_NO from EB_FINADLT_INFO where record_id=#record_id# and FILENAME=#filename#
+	</select>
+	<update id="updateEbNaDLTInfo.update" parameterClass="java.util.Map">
+	update EB_FINADLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	<update id="updateEbNaDLTInfoh.update" parameterClass="java.util.Map">
+	update Eh_FINADLT_INFO set RPT_TYPE=4 where record_id=#record_id# and FILENAME=#filename#
+	</update>
+	
+	<update id="updateEbNaDLTInfo1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update EB_FINADLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+	<update id="updateEbNaDLTInfoh1.update" parameterClass="java.util.Map">
+	<![CDATA[
+	update Eh_FINADLT_INFO set RPT_TYPE=3 where record_id <> #record_id# and FILENAME=#filename#
+	]]>
+	</update>
+</sqlMap>

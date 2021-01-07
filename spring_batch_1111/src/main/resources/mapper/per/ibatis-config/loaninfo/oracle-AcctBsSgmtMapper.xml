@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-AcctBsSgmtMapper">
+
+	<!-- 基础段 -->
+	<resultMap id="Pb_Lnacct_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Lnacct_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="AcctType" property="AcctType" />
+		<result column="AcctCode" property="AcctCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="BusiLines" property="BusiLines" />
+		<result column="BusiDtlLines" property="BusiDtlLines" />
+		<result column="OpenDate" property="OpenDate" />
+		<result column="Cy" property="Cy" />
+		<result column="AcctCredLine" property="AcctCredLine" />
+		<result column="LoanAmt" property="LoanAmt" />
+		<result column="Flag" property="Flag" />
+		<result column="DueDate" property="DueDate" />
+		<result column="RepayMode" property="RepayMode" />
+		<result column="RepayFreqcy" property="RepayFreqcy" />
+		<result column="RepayPrd" property="RepayPrd" />
+		<result column="ApplyBusiDist" property="ApplyBusiDist" />
+		<result column="GuarMode" property="GuarMode" />
+		<result column="OthRepyGuarWay" property="OthRepyGuarWay" />
+		<result column="AssetTrandFlag" property="AssetTrandFlag" />
+		<result column="FundSou" property="FundSou" />
+		<result column="LoanForm" property="LoanForm" />
+		<result column="CreditID" property="CreditID" />
+		<result column="LoanConCode" property="LoanConCode" />
+		<result column="FirstHouLoanFlag" property="FirstHouLoanFlag" />
+		<result column="Mcc" property="Mcc" />
+		<result column="InitCredName" property="InitCredName" />
+		<result column="InitCredOrgNm" property="InitCredOrgNm" />
+		<result column="OrigDbtCate" property="OrigDbtCate" />
+		<result column="InitRpySts" property="InitRpySts" />
+
+		<result column="LNACCTCRED_FLAG" property="LNACCTCRED_FLAG" />
+		<result column="LNACCTMONTH_FLAG" property="LNACCTMONTH_FLAG" />
+		<result column="LNACCTBIG_FLAG" property="LNACCTBIG_FLAG" />
+		<result column="LNACCTDBT_FLAG" property="LNACCTDBT_FLAG" />
+		<result column="LNACCTSPC_FLAG" property="LNACCTSPC_FLAG" />
+		<result column="LNACCTCCC_FLAG" property="LNACCTCCC_FLAG" />
+		<result column="LNACCTMOT_FLAG" property="LNACCTMOT_FLAG" />
+		<result column="LNACCTRLT_FLAG" property="LNACCTRLT_FLAG" />
+		<result column="LNACCTBASEINF_FLAG" property="LNACCTBASEINF_FLAG" />
+
+
+
+		<collection property="Pb_Lnacctmonth_Info" resultMap="Pb_Lnacctmonth_Info_Result210"></collection>
+
+
+
+		<collection property="Pb_Lnacctdbt_Info" resultMap="Pb_Lnacctdbt_Info_Result210"></collection>
+
+		<collection property="Pb_Lnacctrlt_Info_List" resultMap="Pb_Lnacctrlt_Info_Result210"></collection>
+
+		<collection property="Pb_Lnacctspc_Info_List" resultMap="Pb_Lnacctspc_Info_Result210"></collection>
+
+		<collection property="Pb_Guacct_Info_List" resultMap="Pb_Guacct_Info_Result210"></collection>
+
+	</resultMap>
+
+	<!-- 相关还款责任人段 -->
+	<resultMap id="Pb_Lnacctrlt_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Lnacctrlt_Info">
+		<result column="InfoIDType" property="InfoIDType" />
+		<result column="ArlpName" property="ArlpName" />
+		<result column="ArlpCertType" property="ArlpCertType" />
+		<result column="ArlpCertNum" property="ArlpCertNum" />
+		<result column="ArlpType" property="ArlpType" />
+		<result column="ArlpAmt" property="ArlpAmt" />
+		<result column="MaxGuarMcc" property="MaxGuarMcc" />
+		<result column="WartySign" property="WartySign" />
+	</resultMap>
+
+	<!-- 月度表现信息段 -->
+	<resultMap id="Pb_Lnacctmonth_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Lnacctmonth_Info">
+		<result column="Month3" property="Month" />
+		<result column="SettDate3" property="SettDate" />
+		<result column="AcctStatus3" property="AcctStatus" />
+		<result column="AcctBal3" property="AcctBal" />
+		<result column="PridAcctBal3" property="PridAcctBal" />
+		<result column="UsedAmt3" property="UsedAmt" />
+		<result column="NotIsuBal3" property="NotIsuBal" />
+		<result column="RemRepPrd3" property="RemRepPrd" />
+		<result column="FiveCate3" property="FiveCate" />
+		<result column="FiveCateAdjDate3" property="FiveCateAdjDate" />
+		<result column="RpyStatus3" property="RpyStatus" />
+		<result column="RpyPrct3" property="RpyPrct" />
+		<result column="OverdPrd3" property="OverdPrd" />
+		<result column="TotOverd3" property="TotOverd" />
+		<result column="OverdPrinc3" property="OverdPrinc" />
+		<result column="Oved31_60Princ3" property="Oved31_60Princ" />
+		<result column="Oved61_90Princ3" property="Oved61_90Princ" />
+		<result column="Oved91_180Princ3" property="Oved91_180Princ" />
+		<result column="OvedPrinc1803" property="OvedPrinc180" />
+		<result column="OvedrawBaOve1803" property="OvedrawBaOve180" />
+		<result column="CurRpyAmt3" property="CurRpyAmt" />
+		<result column="ActRpyAmt3" property="ActRpyAmt" />
+		<result column="LatRpyDate3" property="LatRpyDate" />
+		<result column="CloseDate3" property="CloseDate" />
+		<result column="SpecLine3" property="SpecLine" />
+		<result column="SpecEfctDate3" property="SpecEfctDate" />
+		<result column="SpecEndDate3" property="SpecEndDate" />
+		<result column="UsedInstAmt3" property="UsedInstAmt" />
+	</resultMap>
+
+	<!-- 非月度表现信息段 -->
+	<resultMap id="Pb_Lnacctdbt_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Lnacctdbt_Info">
+		<result column="AcctStatus" property="AcctStatus" />
+		<result column="AcctBal" property="AcctBal" />
+		<result column="FiveCate" property="FiveCate" />
+		<result column="FiveCateAdjDate" property="FiveCateAdjDate" />
+		<result column="RemRepPrd" property="RemRepPrd" />
+		<result column="RpyStatus" property="RpyStatus" />
+		<result column="OverdPrd" property="OverdPrd" />
+		<result column="TotOverd" property="TotOverd" />
+		<result column="LatRpyAmt" property="LatRpyAmt" />
+		<result column="LatRpyDate" property="LatRpyDate" />
+		<result column="CloseDate" property="CloseDate" />
+	</resultMap>
+
+	<!-- 特殊交易说明段 -->
+	<resultMap id="Pb_Lnacctspc_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Lnacctspc_Info">
+		<result column="ChanTranType" property="ChanTranType" />
+		<result column="TranDate" property="TranDate" />
+		<result column="TranAmt" property="TranAmt" />
+		<result column="DueTranMon" property="DueTranMon" />
+		<result column="DetInfo" property="DetInfo" />
+	</resultMap>
+	
+	<!-- 抵、质押信息 -->
+	<resultMap id="Pb_Guacct_Info_Result210" type="com.dhcc.xml.per.entity.loaninfo.db.Pb_Guacct_Info">
+		<result column="CcCode" property="CcCode" />
+	</resultMap>
+
+	<sql id="Pb_Lnacct_Info_Columns">
+	    <![CDATA[
+	   		T1.Record_Id,
+        	T1.InfRecType,
+			T1.AcctType,
+			T1.AcctCode,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.MngmtOrgCode,
+			T1.BusiLines,
+			T1.BusiDtlLines,
+			T1.OpenDate,
+			T1.Cy,
+			ROUND(T1.AcctCredLine) AS AcctCredLine,
+			ROUND(T1.LoanAmt) AS LoanAmt,
+			T1.Flag,
+			T1.DueDate,
+			T1.RepayMode,
+			T1.RepayFreqcy,
+			T1.RepayPrd,
+			T1.ApplyBusiDist,
+			T1.GuarMode,
+			T1.OthRepyGuarWay,
+			T1.AssetTrandFlag,
+			T1.FundSou, 
+			T1.CreditID,
+			T1.LoanForm,
+			T1.LoanConCode,
+			T1.FirstHouLoanFlag,
+			T1.Mcc,
+			T1.InitCredName,
+			T1.InitCredOrgNm,  
+			T1.OrigDbtCate,
+			T1.InitRpySts,
+			T1.LNACCTCRED_FLAG,
+			T1.LNACCTMONTH_FLAG,
+			T1.LNACCTBIG_FLAG,
+			T1.LNACCTDBT_FLAG,
+			T1.LNACCTSPC_FLAG,
+			T1.LNACCTCCC_FLAG,
+			T1.LNACCTMOT_FLAG,
+			T1.LNACCTRLT_FLAG,
+			T1.LNACCTBASEINF_FLAG,
+			T2.InfoIDType,
+			T2.ArlpName,
+			T2.ArlpCertType,
+			T2.ArlpCertNum,
+			T2.ArlpType,
+			ROUND(T2.ArlpAmt) AS ArlpAmt,
+			T2.WartySign,
+			T2.MaxGuarMcc,
+			T3.Month AS Month3,
+			T3.SettDate AS SettDate3,
+			T3.AcctStatus AS AcctStatus3,
+			ROUND(T3.AcctBal) AS AcctBal3,
+			ROUND(T3.PridAcctBal) AS PridAcctBal3,
+			ROUND(T3.UsedAmt) AS UsedAmt3,
+			ROUND(T3.NotIsuBal) AS NotIsuBal3,
+			T3.RemRepPrd AS RemRepPrd3,
+			T3.FiveCate as FiveCate3,
+			T3.FiveCateAdjDate as FiveCateAdjDate3,
+			T3.RpyStatus AS RpyStatus3,
+			T3.RpyPrct AS RpyPrct3,
+			T3.OverdPrd AS OverdPrd3,
+			ROUND(T3.TotOverd) AS TotOverd3,
+			ROUND(T3.OverdPrinc) AS OverdPrinc3,
+			ROUND(T3.Oved31_60Princ) AS Oved31_60Princ3,
+			ROUND(T3.Oved61_90Princ) AS Oved61_90Princ3,
+			ROUND(T3.Oved91_180Princ) AS Oved91_180Princ3,
+			ROUND(T3.OvedPrinc180) AS OvedPrinc1803,
+			ROUND(T3.OvedrawBaOve180) AS OvedrawBaOve1803,
+			ROUND(T3.CurRpyAmt) AS CurRpyAmt3,
+			ROUND(T3.ActRpyAmt) AS ActRpyAmt3,
+			T3.LatRpyDate AS LatRpyDate3,
+			T3.CloseDate AS CloseDate3,
+			ROUND(T3.SpecLine) AS SpecLine3,
+			T3.SpecEfctDate AS SpecEfctDate3,
+			T3.SpecEndDate AS SpecEndDate3,
+			ROUND(T3.UsedInstAmt) AS UsedInstAmt3,
+			T4.AcctStatus,
+			ROUND(T4.AcctBal) AS AcctBal,
+			T4.FiveCate,
+			T4.FiveCateAdjDate,
+			T4.RemRepPrd,
+			T4.RpyStatus,
+			T4.OverdPrd,
+			ROUND(T4.TotOverd) AS TotOverd,
+			ROUND(T4.LatRpyAmt) AS LatRpyAmt,
+			T4.LatRpyDate,
+			T4.CloseDate,
+			T5.ChanTranType,
+			T5.TranDate,
+			ROUND(T5.TranAmt) AS TranAmt,
+			T5.DueTranMon,
+			T5.DetInfo,
+			T6.CCC AS CcCode
+	    ]]>
+	</sql>
+	
+	<!-- 机构关联限制 -->
+	<sql id="Pb_Lnacct_info_select_where">
+		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A WHERE A.BS_KEY_DATA=T1.ACCTCODE AND A.STS='1')
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+		</if>
+
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+
+	</sql>
+	
+	<!-- 个人借贷款账户信息[1..1] -->
+	<select id="AcctBsSgmtJob_selectAllInfo" resultMap="Pb_Lnacct_Info_Result210">
+		SELECT <include refid="Pb_Lnacct_Info_Columns" /> FROM PB_LNACCT_INFO T1 
+		LEFT JOIN PB_LNACCTRLT_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.LNACCTRLT_FLAG = '1') 
+		LEFT JOIN PB_LNACCTMONTH_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.LNACCTMONTH_FLAG = '1' AND T3.RPT_TYPE = '1') 
+		LEFT JOIN PB_LNACCTDBT_INFO T4 ON (T1.RECORD_ID = T4.MAIN_ID AND T1.LNACCTDBT_FLAG = '1')
+		LEFT JOIN PB_LNACCTSPC_INFO T5 ON (T1.RECORD_ID = T5.MAIN_ID AND T1.LNACCTSPC_FLAG = '1')
+		LEFT JOIN PB_LNACCTMOT_INFO T6 ON (T1.RECORD_ID = T6.MAIN_ID AND T1.LNACCTMOT_FLAG = '1')
+		WHERE T1.INFRECTYPE = '210'
+		<include refid="Pb_Lnacct_info_select_where"/>
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="AcctBsSgmtJob_updatePageNumber">
+		UPDATE PB_LNACCT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '210'
+		<include refid="Pb_Lnacct_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="AcctBsSgmtJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_LNACCT_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '210'
+		<include refid="Pb_Lnacct_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="AcctBsSgmtJob_updateCheckSts">
+		UPDATE PB_LNACCT_INFO T1 SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '210'
+		<include refid="Pb_Lnacct_info_select_where" />
+	</update>
+	<delete id="AcctBsSgmtJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT  1
+		FROM PB_LNACCT_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '210'
+		<include refid="Pb_Lnacct_info_select_where" />
+		)
+	</delete>
+
+</mapper>

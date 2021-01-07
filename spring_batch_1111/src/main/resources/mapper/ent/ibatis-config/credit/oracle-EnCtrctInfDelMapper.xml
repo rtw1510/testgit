@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-EnCtrctInfDelMapper">
+	<resultMap id="EnCtrctInfDel_Result" type="com.dhcc.xml.ent.entity.credit.EnCtrctInfDel">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="DelRecCode" property="DelRecCode" />
+		<result column="DelSgmtCode" property="DelSgmtCode" />
+		<result column="DelStartDate" property="DelStartDate" />
+		<result column="DelEndDate" property="DelEndDate" />
+	</resultMap>
+
+	<sql id="Eb_AcctDlt_Info_Columns423">
+		<![CDATA[
+			InfRecType,
+			DelRecCode,
+			DelSgmtCode,
+			DelStartDate,
+			DelEndDate
+		]]>
+	</sql>
+	
+	<!-- 机构关联限制 -->
+	<sql id="Eb_AcctDlt_info_select_where423">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<!-- 读取数据 -->
+	<select id="EnCtrctInfDelJob_selectAllInfo" resultMap="EnCtrctInfDel_Result">
+		SELECT <include refid="Eb_AcctDlt_Info_Columns423" /> FROM EB_ACCTDLT_INFO T1
+		WHERE T1.INFRECTYPE = '423'
+		<include refid="Eb_AcctDlt_info_select_where423"/>
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnCtrctInfDelJob_updatePageNumber">
+		UPDATE EB_ACCTDLT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '423'
+		<include refid="Eb_AcctDlt_info_select_where423" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnCtrctInfDelJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_ACCTDLT_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '423'
+		<include refid="Eb_AcctDlt_info_select_where423" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnCtrctInfDelJob_updateCheckSts">
+		UPDATE EB_ACCTDLT_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '423'
+		<include refid="Eb_AcctDlt_info_select_where423" />
+	</update>
+	<delete id="EnCtrctInfDelJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_ACCTDLT_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '423'
+		<include refid="Eb_AcctDlt_info_select_where423" />
+		)
+	</delete>
+
+</mapper>

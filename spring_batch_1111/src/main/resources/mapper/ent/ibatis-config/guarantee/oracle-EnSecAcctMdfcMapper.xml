@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-EnSecAcctMdfcMapper">
+	<resultMap id="Eb_AcctMdf_Info_Result442" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_AcctMdf_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="ModRecCode" property="ModRecCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="AcctType" property="AcctType"/>
+		<result column="MdfcSgmtCode" property="MdfcSgmtCode" />
+
+		<collection property="Eb_GuarAcc_Info" resultMap="Eb_GuarAcc_Info_Result442"></collection>
+		<collection property="Eb_GuarAccRel_Info_List" resultMap="Eb_GuarAccRel_Info_Result442"></collection>
+		<collection property="Eb_Guacct_Info_List" resultMap="Eb_Guacct_Info_Result442"></collection>
+	</resultMap>
+
+	<resultMap id="Eb_GuarAcc_Info_Result442" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_GuarAcc_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="AcctType" property="AcctType" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="BusiLines" property="BusiLines" />
+		<result column="BusiDtilLines" property="BusiDtilLines" />
+		<result column="OpenDate" property="OpenDate" />
+		<result column="GuarAmt" property="GuarAmt" />
+		<result column="Cy" property="Cy" />
+		<result column="DueDate" property="DueDate" />
+		<result column="GuarMode" property="GuarMode" />
+		<result column="OthRepyGuarWay" property="OthRepyGuarWay" />
+		<result column="SecDep" property="SecDep" />
+		<result column="CtrctTxtCode" property="CtrctTxtCode" />
+		<result column="Mcc" property="Mcc" />
+		<result column="AcctStatus" property="AcctStatus" />
+		<result column="LoanAmt" property="LoanAmt" />
+		<result column="RepayPrd" property="RepayPrd" />
+		<result column="FiveCate" property="FiveCate" />
+		<result column="FiveCateAdjDate" property="FiveCateAdjDate" />
+		<result column="RiEx" property="RiEx" />
+		<result column="CompAdvFlag" property="CompAdvFlag" />
+		<result column="CloseDate" property="CloseDate" />
+	</resultMap>
+
+	<resultMap id="Eb_GuarAccRel_Info_Result442" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_GuarAccRel_Info">
+		<result column="InfoIDType" property="InfoIDType" />
+		<result column="ArlpName" property="ArlpName" />
+		<result column="ArlpCertType" property="ArlpCertType" />
+		<result column="ArlpCertNum" property="ArlpCertNum" />
+		<result column="ArlpType" property="ArlpType" />
+		<result column="ArlpAmt" property="ArlpAmt" />
+		<result column="WartySign" property="WartySign" />
+		<result column="MaxGuarMcc" property="MaxGuarMcc" />
+	</resultMap>
+	
+	<resultMap id="Eb_Guacct_Info_Result442" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_Guacct_Info">
+		<result column="CcCode" property="CcCode" />
+	</resultMap>
+
+	<sql id="Eb_AcctMdf_Info_Columns442">
+	    <![CDATA[
+	    	T1.Record_Id,
+	   		T1.InfRecType,
+	   		T1.ModRecCode,
+	   		T1.RptDate,
+	   		T1.AcctType,
+	   		T1.MdfcSgmtCode,
+			T2.InfRecType,
+			T2.AcctType,
+			T2.AcctCode,
+			T2.RptDate,
+			T2.RptDateCode,
+			T2.Name,
+			T2.IDType,
+			T2.IDNum,
+			T2.MngmtOrgCode,
+			T2.BusiLines,
+			T2.BusiDtilLines,
+			T2.OpenDate,
+			ROUND(T2.GuarAmt) AS GuarAmt,
+			T2.Cy,
+			T2.DueDate,
+			T2.GuarMode,
+			T2.OthRepyGuarWay,
+			T2.SecDep,
+			T2.CtrctTxtCode,
+			T2.Mcc,
+			T2.AcctStatus,
+			ROUND(T2.LoanAmt) AS LoanAmt,
+			T2.RepayPrd,
+			T2.FiveCate,
+			T2.FiveCateAdjDate,
+			ROUND(T2.RiEx) AS RiEx,
+			T2.CompAdvFlag,
+			T2.CloseDate,
+			T3.InfoIDType,
+			T3.ArlpName,
+			T3.ArlpCertType,
+			T3.ArlpCertNum,
+			T3.ArlpType,
+			ROUND(T3.ArlpAmt) AS ArlpAmt,
+			T3.WartySign,
+    		T3.MaxGuarMcc,
+    		T4.CcCode
+		]]>
+	</sql>
+
+	<!-- 机构关联限制 -->
+	<sql id="Eb_AcctMdf_info_select_where442">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<select id="EnSecAcctMdfcJob_selectAllInfo" resultMap="Eb_AcctMdf_Info_Result442">
+		SELECT <include refid="Eb_AcctMdf_Info_Columns442" /> FROM EB_ACCTMDF_INFO T1 
+		LEFT JOIN EM_GUARACC_INFO T2 ON (T1.MODRECCODE = T2.RECORD_ID AND T1.MDFCSGMTCODE IN ('B','C','D','G'))
+		LEFT JOIN EM_GUARACCREL_INFO T3 ON (T1.MODRECCODE = T3.MAIN_ID AND T1.MDFCSGMTCODE = 'E')
+		LEFT JOIN EM_GUACCT_INFO T4 ON (T1.MODRECCODE = T4.MAIN_ID AND T1.MDFCSGMTCODE = 'F')
+		WHERE T1.INFRECTYPE = '442'
+		<include refid="Eb_AcctMdf_info_select_where442"/>
+	</select>
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnSecAcctMdfcJob_updatePageNumber">
+		UPDATE EB_ACCTMDF_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '442'
+		<include refid="Eb_AcctMdf_info_select_where442" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnSecAcctMdfcJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_ACCTMDF_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '442'
+		<include refid="Eb_AcctMdf_info_select_where442" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnSecAcctMdfcJob_updateCheckSts">
+		UPDATE EB_ACCTMDF_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '442'
+		<include refid="Eb_AcctMdf_info_select_where442" />
+	</update>
+	<delete id="EnSecAcctMdfcJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_ACCTMDF_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '442'
+		<include refid="Eb_AcctMdf_info_select_where442" />
+		)
+	</delete>
+
+</mapper>

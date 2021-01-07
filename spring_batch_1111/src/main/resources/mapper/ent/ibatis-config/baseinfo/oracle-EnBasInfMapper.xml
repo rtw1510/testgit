@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="oracle-EnBasInfMapper">
+	<!-- 基础段[1..1] -->
+	<resultMap id="EB_CustBase_Info_Result310" type="com.dhcc.xml.ent.entity.baseinfo.db.EB_CustBase_Info">
+		<result column="Record_Id" property="Record_Id"/>
+		<result column="InfRecType" property="InfRecType"/>
+		<result column="EntName" property="EntName"/>
+		<result column="EntCertType" property="EntCertType"/>
+		<result column="EntCertNum" property="EntCertNum"/>
+		<result column="InfSurcCode" property="InfSurcCode"/>
+		<result column="RptDate" property="RptDate"/>
+		<result column="RptDateCode" property="RptDateCode"/>
+		<result column="Cimoc" property="Cimoc"/>
+		<result column="CustomerType" property="CustomerType"/>
+		<result column="EtpSts" property="EtpSts"/>
+		<result column="OrgType" property="OrgType"/>
+		<!-- 基本概况信息段  -->
+		<result column="Nationality" property="Nationality"/>
+		<result column="RegAdd" property="RegAdd"/>
+		<result column="AdmDivOfReg" property="AdmDivOfReg"/>
+		<result column="EstablishDate" property="EstablishDate"/>
+		<result column="BizEndDate" property="BizEndDate"/>
+		<result column="BizRange" property="BizRange"/>
+		<result column="EcoIndusCate" property="EcoIndusCate"/>
+		<result column="EcoType" property="EcoType"/>
+		<result column="EntScale" property="EntScale"/>
+		<result column="FcsInfoUpDate" property="FcsInfoUpDate"/>
+		<!-- 注册资本及主要出资人段  -->
+		<result column="RegCapCurrency" property="RegCapCurrency"/>
+		<result column="RegCap" property="RegCap"/>
+		<!-- 上级机构段 -->
+		<result column="SupOrgType" property="SupOrgType"/>
+		<result column="SupOrgName" property="SupOrgName"/>
+		<result column="SupOrgCertType" property="SupOrgCertType"/>
+		<result column="SupOrgCertNum" property="SupOrgCertNum"/>
+		<result column="SupOrgInfoUpDate" property="SupOrgInfoUpDate"/>
+		<!-- 联系方式段 -->
+		<result column="ConAddDistrictCode" property="ConAddDistrictCode"/>
+		<result column="SupOrgName" property="SupOrgName"/>
+		<result column="ConAdd" property="ConAdd"/>
+		<result column="ConPhone" property="ConPhone"/>
+		<result column="FinConPhone" property="FinConPhone"/>
+		<result column="CotaInfoUpDate" property="CotaInfoUpDate"/>
+		
+		<result column="CustBaseoth_Flag" property="CustBaseoth_Flag"/>
+		<result column="CustBaseinf_Flag" property="CustBaseinf_Flag"/>
+		<result column="CustBasemnm_Flag" property="CustBasemnm_Flag"/>
+		<result column="CustBasehold_Flag" property="CustBasehold_Flag"/>
+		<result column="CustBasectr_Flag" property="CustBasectr_Flag"/>
+		<result column="CustBaseup_Flag" property="CustBaseup_Flag"/>
+		<result column="CustBasecont_Flag" property="CustBasecont_Flag"/>
+
+		<collection property="EB_CustBaseOth_Info_List" resultMap="EB_CustBaseOth_Info_Result310"></collection>
+		<collection property="EB_CustBaseMnm_Info_List" resultMap="EB_CustBaseMnm_Info_Result310"></collection>
+		<collection property="EB_CustBaseHold_Info_List" resultMap="EB_CustBaseHold_Info_Result310"></collection>
+		<collection property="EB_CustBaseCtr_Info_List" resultMap="EB_CustBaseCtr_Info_Result310"></collection>
+
+
+	</resultMap>
+	<!-- 其他标识信息[1..99] -->
+	<resultMap id="EB_CustBaseOth_Info_Result310" type="com.dhcc.xml.ent.entity.baseinfo.db.EB_CustBaseOth_Info" >
+		<result column="OthEntCertType" property="OthEntCertType"/>
+		<result column="OthEntCertNum" property="OthEntCertNum"/>
+	</resultMap>
+	<!-- 主要组成人员信息 -->
+	<resultMap id="EB_CustBaseMnm_Info_Result310" type="com.dhcc.xml.ent.entity.baseinfo.db.EB_CustBaseMnm_Info">
+		<result column="MmbAlias" property="MmbAlias"/>
+		<result column="MmbIDType" property="MmbIDType"/>
+		<result column="MmbIDNum" property="MmbIDNum"/>
+		<result column="MmbPstn" property="MmbPstn"/>
+	</resultMap>
+	<!-- 出资人信息 -->
+	<resultMap id="EB_CustBaseHold_Info_Result310" type="com.dhcc.xml.ent.entity.baseinfo.db.EB_CustBaseHold_Info" >
+		<result column="SharHodType" property="SharHodType"/>
+		<result column="SharHodCertType" property="SharHodCertType"/>
+		<result column="SharHodName" property="SharHodName"/>
+		<result column="SharHodIDType" property="SharHodIDType"/>
+		<result column="SharHodIDNum" property="SharHodIDNum"/>
+		<result column="InvRatio" property="InvRatio"/>
+	</resultMap>
+	<!-- 实际控制人信息 -->
+	<resultMap id="EB_CustBaseCtr_Info_Result310" type="com.dhcc.xml.ent.entity.baseinfo.db.EB_CustBaseCtr_Info">
+		<result column="ActuCotrlCertType" property="ActuCotrlCertType"/>
+		<result column="ActuCotrlName" property="ActuCotrlName"/>
+		<result column="ActuCotrlIDType" property="ActuCotrlIDType"/>
+		<result column="ActuCotrlIDNum" property="ActuCotrlIDNum"/>
+	</resultMap>
+	<!-- 基础段、 基本概况信息段、注册资本及主要出资人段、上级机构段、联系方式段查询表字段-->
+	<sql id="EB_CustBase_Info_Columns">
+	    <![CDATA[
+	    	T1.Record_Id,
+	   		T1.RptDateCode,
+        	T1.InfRecType,
+			T1.EntName,
+			T1.EntCertType,
+			T1.EntCertNum,
+			T1.RptDate,
+			T1.InfSurcCode,
+			T1.Cimoc,
+			T1.CustomerType,
+			T1.EtpSts,
+			T1.OrgType,
+			T1.Cust_No,
+			T1.Nationality,
+			T1.RegAdd,
+			T1.AdmDivOfReg,
+			T1.EstablishDate,
+			T1.BizEndDate,
+			T1.BizRange,
+			T1.EcoIndusCate,
+			T1.EcoType,
+			T1.EntScale,
+			T1.FcsInfoUpDate,
+			T1.RegCapCurrency,
+			ROUND(T1.RegCap) AS RegCap,
+			T1.SupOrgType,
+			T1.SupOrgName,
+			T1.SupOrgCertType,
+			T1.SupOrgCertNum,
+			T1.SupOrgInfoUpDate,
+			T1.ConAddDistrictCode,
+			T1.SupOrgName,
+			T1.ConAdd,
+			T1.ConPhone,
+			T1.FinConPhone,
+			T1.CotaInfoUpDate,
+			T1.CustBaseoth_Flag,
+			T1.CustBaseinf_Flag,
+			T1.CustBasemnm_Flag,
+			T1.CustBasehold_Flag,
+			T1.CustBasectr_Flag,
+			T1.CustBaseup_Flag,
+			T1.CustBasecont_Flag,
+			T2.OthEntCertType,
+			T2.OthEntCertNum,
+			T3.MmbAlias,
+			T3.MmbIDType,
+			T3.MmbIDNum,
+			T3.MmbPstn,
+			T4.SharHodType,
+			T4.SharHodCertType,
+			T4.SharHodName,
+			T4.SharHodIDType,
+			T4.SharHodIDNum,
+-- 			T4.InvRatio,
+			to_char(T4.InvRatio,'FM990.90') InvRatio,
+			T5.ActuCotrlCertType,
+			T5.ActuCotrlName,
+			T5.ActuCotrlIDType,
+			T5.ActuCotrlIDNum
+	    ]]>
+	</sql>
+	<!-- 机构关联限制 -->
+	<sql id="Eb_CustBase_info_select_where">
+		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A,EB_CORPACCT_INFO C WHERE A.BS_KEY_DATA=C.ACCTCODE AND T1.CUST_NO=C.CUST_NO AND A.STS='1')
+			<if test="br_no !=''">
+				EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+            </if>
+			<if test="tx_date !=''">
+				T1.TX_DATE = #{tx_date}
+            </if>
+			<if test="record_id !=''">
+				T1.record_id = #{record_id}
+			</if>
+			<if test="record_id ==''">
+				T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+			</if>
+	</sql>
+	<!-- 基础段[1..1] -->
+	<select id="EnBasInfJob_selectAllInfo" resultMap="EB_CustBase_Info_Result310">
+		SELECT <include refid="EB_CustBase_Info_Columns"/> FROM EB_CUSTBASE_INFO T1 
+		LEFT JOIN EB_CUSTBASEOTH_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.CUSTBASEOTH_FLAG = '1')
+		LEFT JOIN EB_CUSTBASEMNM_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.CUSTBASEMNM_FLAG = '1')
+		LEFT JOIN EB_CUSTBASEHOLD_INFO T4 ON (T1.RECORD_ID = T4.MAIN_ID AND T1.CUSTBASEHOLD_FLAG = '1')
+		LEFT JOIN EB_CUSTBASECTR_INFO T5 ON (T1.RECORD_ID = T5.MAIN_ID AND T1.CUSTBASECTR_FLAG = '1')
+		WHERE  T1.INFRECTYPE = '310'
+		<include refid="Eb_CustBase_info_select_where" />
+	</select>
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnBasInfJob_updatePageNumber">
+		UPDATE EB_CUSTBASE_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '310'
+		<include refid="Eb_CustBase_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnBasInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_CUSTBASE_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '310'
+		<include refid="Eb_CustBase_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnBasInfJob_updateCheckSts">
+		UPDATE EB_CUSTBASE_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '310'
+		<include refid="Eb_CustBase_info_select_where" />
+	</update>
+	<delete id="EnBasInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_CUSTBASE_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '310'
+		<include refid="Eb_CustBase_info_select_where" />
+		)
+	</delete>
+
+</mapper>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-BalanceSheet02Mapper">
+	<resultMap id="EB_FinaBal02_Info_Result" type="com.dhcc.xml.ent.entity.finance.db.EB_FinaBal02_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="EntName" property="EntName" />
+		<result column="EntCertType" property="EntCertType" />
+		<result column="EntCertNum" property="EntCertNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="SheetYear" property="SheetYear" />
+		<result column="SheetType" property="SheetType" />
+		<result column="SheetTypeDivide" property="SheetTypeDivide" />
+		<result column="AuditFirmName" property="AuditFirmName" />
+		<result column="AuditorName" property="AuditorName" />
+		<result column="AuditTime" property="AuditTime" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="CurrencyFunds" property="CurrencyFunds" />
+		<result column="ShortTermInvestments" property="ShortTermInvestments" />
+		<result column="NotesReceivable" property="NotesReceivable" />
+		<result column="DividendsReceivable" property="DividendsReceivable" />
+		<result column="InterestReceivable" property="InterestReceivable" />
+		<result column="AccountsReceivable" property="AccountsReceivable" />
+		<result column="OtherReceivables" property="OtherReceivables" />
+		<result column="Prepayments" property="Prepayments" />
+		<result column="FutureGuarantee" property="FutureGuarantee" />
+		<result column="AllowanceReceivable" property="AllowanceReceivable" />
+		<result column="ExportDrawbackReceivable" property="ExportDrawbackReceivable" />
+		<result column="Inventories" property="Inventories" />
+		<result column="RawMaterials" property="RawMaterials" />
+		<result column="FinishedProducts" property="FinishedProducts" />
+		<result column="DeferredExpenses" property="DeferredExpenses" />
+		<result column="UnsettledGLOnCurrentAssets" property="UnsettledGLOnCurrentAssets" />
+		<result column="LongTermDebentureIFDIAY" property="LongTermDebentureInvestmentFallingDueInAYear" />
+		<result column="OtherCurrentAssets" property="OtherCurrentAssets" />
+		<result column="TotalCurrentAssets" property="TotalCurrentAssets" />
+		<result column="LongTermInvestment" property="LongTermInvestment" />
+		<result column="LongTermEquityInvestment" property="LongTermEquityInvestment" />
+		<result column="LongTermSecuritiesInvestment" property="LongTermSecuritiesInvestment" />
+		<result column="IncorporatingPriceDifference" property="IncorporatingPriceDifference" />
+		<result column="TotalLongTermInvestment" property="TotalLongTermInvestment" />
+		<result column="OriginalCostOfFixedAsset" property="OriginalCostOfFixedAsset" />
+		<result column="FixedAssetAccumulatedD" property="FixedAssetAccumulatedDepreciation" />
+		<result column="FixedAssetsNetValue" property="FixedAssetsNetValue" />
+		<result column="ProvisionForImpairmentOfFixedA" property="ProvisionForImpairmentOfFixedAssets" />
+		<result column="NetValueOfFixedAssets" property="NetValueOfFixedAssets" />
+		<result column="FixedAssetsPendingForDisposal" property="FixedAssetsPendingForDisposal" />
+		<result column="ConstructionMaterials" property="ConstructionMaterials" />
+		<result column="ConstructionInProgress" property="ConstructionInProgress" />
+		<result column="UnsettledGLOnFixedAssets" property="UnsettledGLOnFixedAssets" />
+		<result column="TotalFixedAssets" property="TotalFixedAssets" />
+		<result column="IntangibleAssets" property="IntangibleAssets" />
+		<result column="LandUseRights" property="LandUseRights" />
+		<result column="DeferredAssets" property="DeferredAssets" />
+		<result column="IncludingFixedAssetsRepair" property="IncludingFixedAssetsRepair" />
+		<result column="ImprovementExpenditureOfFixedA" property="ImprovementExpenditureOfFixedAssets" />
+		<result column="OtherLongTermAssets" property="OtherLongTermAssets" />
+		<result column="AmongItSpeciallyApprovedRM" property="AmongItSpeciallyApprovedReservingMaterials" />
+		<result column="TotalIntangibleAssetsAndOtherA" property="TotalIntangibleAssetsAndOtherAssets" />
+		<result column="DeferredAssetsDebits" property="DeferredAssetsDebits" />
+		<result column="TotalAssets" property="TotalAssets" />
+		<result column="ShortTermBorrowings" property="ShortTermBorrowings" />
+		<result column="NotesPayable" property="NotesPayable" />
+		<result column="AccountsPayable" property="AccountsPayable" />
+		<result column="ReceiptsInAdvance" property="ReceiptsInAdvance" />
+		<result column="WagesOrSalariesPayables" property="WagesOrSalariesPayables" />
+		<result column="EmployeeBenefits" property="EmployeeBenefits" />
+		<result column="IncomePayable" property="IncomePayable" />
+		<result column="TaxesPayable" property="TaxesPayable" />
+		<result column="OtherPayableToGovernment" property="OtherPayableToGovernment" />
+		<result column="OtherPayable" property="OtherPayable" />
+		<result column="ProvisionForExpenses" property="ProvisionForExpenses" />
+		<result column="Provisions" property="Provisions" />
+		<result column="LongTermLiabilitiesDWOY" property="LongTermLiabilitiesDueWithinOneYear" />
+		<result column="OtherCurrentLiabilities" property="OtherCurrentLiabilities" />
+		<result column="TotalCurrentLiabilities" property="TotalCurrentLiabilities" />
+		<result column="LongTermBorrowings" property="LongTermBorrowings" />
+		<result column="BondsPayable" property="BondsPayable" />
+		<result column="LongTermPayables" property="LongTermPayables" />
+		<result column="GrantsPayable" property="GrantsPayable" />
+		<result column="OtherLongTermLiabilities" property="OtherLongTermLiabilities" />
+		<result column="SpecialReserveFund" property="SpecialReserveFund" />
+		<result column="TotalLongTermLiabilities" property="TotalLongTermLiabilities" />
+		<result column="DeferredTaxationCredit" property="DeferredTaxationCredit" />
+		<result column="TotalLiabilities" property="TotalLiabilities" />
+		<result column="MinorityInterest" property="MinorityInterest" />
+		<result column="PaidInCapital" property="PaidInCapital" />
+		<result column="NationalCapital" property="NationalCapital" />
+		<result column="CollectiveCapital" property="CollectiveCapital" />
+		<result column="LegalPersonsCapital" property="LegalPersonsCapital" />
+		<result column="StateOwnedLegalPersonsCapital" property="StateOwnedLegalPersonsCapital" />
+		<result column="CollectiveLegalPersonsCapital" property="CollectiveLegalPersonsCapital" />
+		<result column="PersonalCapital" property="PersonalCapital" />
+		<result column="ForeignBusinessmensCapital" property="ForeignBusinessmensCapital" />
+		<result column="CapitalrRserve" property="CapitalrRserve" />
+		<result column="SurplusReserve" property="SurplusReserve" />
+		<result column="StatutorySurplusReserve" property="StatutorySurplusReserve" />
+		<result column="PublicWelfareFund" property="PublicWelfareFund" />
+		<result column="SupplermentaryCurrentCapital" property="SupplermentaryCurrentCapital" />
+		<result column="UnaffirmedInvestmentLoss" property="UnaffirmedInvestmentLoss" />
+		<result column="UnappropriatedProfit" property="UnappropriatedProfit" />
+		<result column="DifferenceOnTranslationOFCFS" property="DifferenceOnTranslationOfForeignCurrencyFinancialStatements" />
+		<result column="TotalEquity" property="TotalEquity" />
+		<result column="TotalEquityAndLiabilities" property="TotalEquityAndLiabilities" />
+	</resultMap>
+
+	<sql id="EB_FinaBal02_Info_Columns">
+		<![CDATA[
+			InfRecType,
+			EntName,
+			EntCertType,
+			EntCertNum,
+			RptDate,
+			SheetYear,
+			SheetType,
+			SheetTypeDivide,
+			AuditFirmName,
+			AuditorName,
+			AuditTime,
+			Cimoc,
+			RptDateCode,
+			to_char(CurrencyFunds,'FM99999999999999990.90') CurrencyFunds,
+			to_char(ShortTermInvestments,'FM99999999999999990.90') ShortTermInvestments,
+			to_char(NotesReceivable,'FM99999999999999990.90') NotesReceivable,
+			to_char(DividendsReceivable,'FM99999999999999990.90') DividendsReceivable,
+			to_char(InterestReceivable,'FM99999999999999990.90') InterestReceivable,
+			to_char(AccountsReceivable,'FM99999999999999990.90') AccountsReceivable,
+			to_char(OtherReceivables,'FM99999999999999990.90') OtherReceivables,
+			to_char(Prepayments,'FM99999999999999990.90') Prepayments,
+			to_char(FutureGuarantee,'FM99999999999999990.90') FutureGuarantee,
+			to_char(AllowanceReceivable,'FM99999999999999990.90') AllowanceReceivable,
+			to_char(ExportDrawbackReceivable,'FM99999999999999990.90') ExportDrawbackReceivable,
+			to_char(Inventories,'FM99999999999999990.90') Inventories,
+			to_char(RawMaterials,'FM99999999999999990.90') RawMaterials,
+			to_char(FinishedProducts,'FM99999999999999990.90') FinishedProducts,
+			to_char(DeferredExpenses,'FM99999999999999990.90') DeferredExpenses,
+			to_char(UnsettledGLOnCurrentAssets,'FM99999999999999990.90') UnsettledGLOnCurrentAssets,
+			to_char(LongTermDebentureIFDIAY,'FM99999999999999990.90') LongTermDebentureIFDIAY,
+			to_char(OtherCurrentAssets,'FM99999999999999990.90') OtherCurrentAssets,
+			to_char(TotalCurrentAssets,'FM99999999999999990.90') TotalCurrentAssets,
+			to_char(LongTermInvestment,'FM99999999999999990.90') LongTermInvestment,
+			to_char(LongTermEquityInvestment,'FM99999999999999990.90') LongTermEquityInvestment,
+			to_char(LongTermSecuritiesInvestment,'FM99999999999999990.90') LongTermSecuritiesInvestment,
+			to_char(IncorporatingPriceDifference,'FM99999999999999990.90') IncorporatingPriceDifference,
+			to_char(TotalLongTermInvestment,'FM99999999999999990.90') TotalLongTermInvestment,
+			to_char(OriginalCostOfFixedAsset,'FM99999999999999990.90') OriginalCostOfFixedAsset,
+			to_char(FixedAssetAccumulatedD,'FM99999999999999990.90') FixedAssetAccumulatedD,
+			to_char(FixedAssetsNetValue,'FM99999999999999990.90') FixedAssetsNetValue,
+			to_char(ProvisionForImpairmentOfFixedA,'FM99999999999999990.90') ProvisionForImpairmentOfFixedA,
+			to_char(NetValueOfFixedAssets,'FM99999999999999990.90') NetValueOfFixedAssets,
+			to_char(FixedAssetsPendingForDisposal,'FM99999999999999990.90') FixedAssetsPendingForDisposal,
+			to_char(ConstructionMaterials,'FM99999999999999990.90') ConstructionMaterials,
+			to_char(ConstructionInProgress,'FM99999999999999990.90') ConstructionInProgress,
+			to_char(UnsettledGLOnFixedAssets,'FM99999999999999990.90') UnsettledGLOnFixedAssets,
+			to_char(TotalFixedAssets,'FM99999999999999990.90') TotalFixedAssets,
+			to_char(IntangibleAssets,'FM99999999999999990.90') IntangibleAssets,
+			to_char(LandUseRights,'FM99999999999999990.90') LandUseRights,
+			to_char(DeferredAssets,'FM99999999999999990.90') DeferredAssets,
+			to_char(IncludingFixedAssetsRepair,'FM99999999999999990.90') IncludingFixedAssetsRepair,
+			to_char(ImprovementExpenditureOfFixedA,'FM99999999999999990.90') ImprovementExpenditureOfFixedA,
+			to_char(OtherLongTermAssets,'FM99999999999999990.90') OtherLongTermAssets,
+			to_char(AmongItSpeciallyApprovedRM,'FM99999999999999990.90') AmongItSpeciallyApprovedRM,
+			to_char(TotalIntangibleAssetsAndOtherA,'FM99999999999999990.90') TotalIntangibleAssetsAndOtherA,
+			to_char(DeferredAssetsDebits,'FM99999999999999990.90') DeferredAssetsDebits,
+			to_char(TotalAssets,'FM99999999999999990.90') TotalAssets,
+			to_char(ShortTermBorrowings,'FM99999999999999990.90') ShortTermBorrowings,
+			to_char(NotesPayable,'FM99999999999999990.90') NotesPayable,
+			to_char(AccountsPayable,'FM99999999999999990.90') AccountsPayable,
+			to_char(ReceiptsInAdvance,'FM99999999999999990.90') ReceiptsInAdvance,
+			to_char(WagesOrSalariesPayables,'FM99999999999999990.90') WagesOrSalariesPayables,
+			to_char(EmployeeBenefits,'FM99999999999999990.90') EmployeeBenefits,
+			to_char(IncomePayable,'FM99999999999999990.90') IncomePayable,
+			to_char(TaxesPayable,'FM99999999999999990.90') TaxesPayable,
+			to_char(OtherPayableToGovernment,'FM99999999999999990.90') OtherPayableToGovernment,
+			to_char(OtherPayable,'FM99999999999999990.90') OtherPayable,
+			to_char(ProvisionForExpenses,'FM99999999999999990.90') ProvisionForExpenses,
+			to_char(Provisions,'FM99999999999999990.90') Provisions,
+			to_char(LongTermLiabilitiesDWOY,'FM99999999999999990.90') LongTermLiabilitiesDWOY,
+			to_char(OtherCurrentLiabilities,'FM99999999999999990.90') OtherCurrentLiabilities,
+			to_char(TotalCurrentLiabilities,'FM99999999999999990.90') TotalCurrentLiabilities,
+			to_char(LongTermBorrowings,'FM99999999999999990.90') LongTermBorrowings,
+			to_char(BondsPayable,'FM99999999999999990.90') BondsPayable,
+			to_char(LongTermPayables,'FM99999999999999990.90') LongTermPayables,
+			to_char(GrantsPayable,'FM99999999999999990.90') GrantsPayable,
+			to_char(OtherLongTermLiabilities,'FM99999999999999990.90') OtherLongTermLiabilities,
+			to_char(SpecialReserveFund,'FM99999999999999990.90') SpecialReserveFund,
+			to_char(TotalLongTermLiabilities,'FM99999999999999990.90') TotalLongTermLiabilities,
+			to_char(DeferredTaxationCredit,'FM99999999999999990.90') DeferredTaxationCredit,
+			to_char(TotalLiabilities,'FM99999999999999990.90') TotalLiabilities,
+			to_char(MinorityInterest,'FM99999999999999990.90') MinorityInterest,
+			to_char(PaidInCapital,'FM99999999999999990.90') PaidInCapital,
+			to_char(NationalCapital,'FM99999999999999990.90') NationalCapital,
+			to_char(CollectiveCapital,'FM99999999999999990.90') CollectiveCapital,
+			to_char(LegalPersonsCapital,'FM99999999999999990.90') LegalPersonsCapital,
+			to_char(StateOwnedLegalPersonsCapital,'FM99999999999999990.90') StateOwnedLegalPersonsCapital,
+			to_char(CollectiveLegalPersonsCapital,'FM99999999999999990.90') CollectiveLegalPersonsCapital,
+			to_char(PersonalCapital,'FM99999999999999990.90') PersonalCapital,
+			to_char(ForeignBusinessmensCapital,'FM99999999999999990.90') ForeignBusinessmensCapital,
+			to_char(CapitalrRserve,'FM99999999999999990.90') CapitalrRserve,
+			to_char(SurplusReserve,'FM99999999999999990.90') SurplusReserve,
+			to_char(StatutorySurplusReserve,'FM99999999999999990.90') StatutorySurplusReserve,
+			to_char(PublicWelfareFund,'FM99999999999999990.90') PublicWelfareFund,
+			to_char(SupplermentaryCurrentCapital,'FM99999999999999990.90') SupplermentaryCurrentCapital,
+			to_char(UnaffirmedInvestmentLoss,'FM99999999999999990.90') UnaffirmedInvestmentLoss,
+			to_char(UnappropriatedProfit,'FM99999999999999990.90') UnappropriatedProfit,
+			to_char(DifferenceOnTranslationOFCFS,'FM99999999999999990.90') DifferenceOnTranslationOFCFS,
+			to_char(TotalEquity,'FM99999999999999990.90') TotalEquity,
+			to_char(TotalEquityAndLiabilities,'FM99999999999999990.90') TotalEquityAndLiabilities
+
+		]]>
+	</sql>
+	
+		<!-- 机构关联限制 -->
+	<sql id="EB_FinaBal02_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<!-- 读取数据 -->
+	<select id="BalanceSheet02Job_selectAllInfo" resultMap="EB_FinaBal02_Info_Result">
+		SELECT <include refid="EB_FinaBal02_Info_Columns" /> FROM EB_FINABAL02_INFO T1
+		WHERE T1.INFRECTYPE = '610'
+		<include refid="EB_FinaBal02_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="BalanceSheet02Job_updatePageNumber">
+		UPDATE EB_FINABAL02_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '610'
+		<include refid="EB_FinaBal02_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="BalanceSheet02Job_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_FINABAL02_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '610'
+		<include refid="EB_FinaBal02_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="BalanceSheet02Job_updateCheckSts">
+		UPDATE EB_FINABAL02_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '610'
+		<include refid="EB_FinaBal02_info_select_where" />
+	</update>
+	<delete id="BalanceSheet02Job_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_FINABAL02_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '610'
+		<include refid="EB_FinaBal02_info_select_where" />
+		)
+	</delete>
+
+</mapper>

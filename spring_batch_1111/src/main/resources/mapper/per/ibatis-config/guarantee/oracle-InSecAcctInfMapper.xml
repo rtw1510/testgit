@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-InSecAcctInfMapper">
+	<resultMap id="Pb_LnsecAcct_Info_Result230" type="com.dhcc.xml.per.entity.guarantee.db.Pb_LnsecAcct_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="AcctType" property="AcctType" />
+		<result column="AcctCode" property="AcctCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="BusiLines" property="BusiLines" />
+		<result column="BusiDtilLines" property="BusiDtilLines" />
+		<result column="OpenDate" property="OpenDate" />
+		<result column="AcctCredLine" property="AcctCredLine" />
+		<result column="Cy" property="Cy" />
+		<result column="DueDate" property="DueDate" />
+		<result column="GuarMode" property="GuarMode" />
+		<result column="OthRepyGuarWay" property="OthRepyGuarWay" />
+		<result column="SecDep" property="SecDep" />
+		<result column="CtrctTxtCd" property="CtrctTxtCd" />
+		<result column="AcctStatus" property="AcctStatus" />
+		<result column="LoanAmt" property="LoanAmt" />
+		<result column="RepayPrd" property="RepayPrd" />
+		<result column="FiveCate" property="FiveCate" />
+		<result column="FiveCateAdjDate" property="FiveCateAdjDate" />
+		<result column="RiEx" property="RiEx" />
+		<result column="CompAdvFlag" property="CompAdvFlag" />
+		<result column="CloseDate" property="CloseDate" />
+		
+		<result column="LNSECACCTBASEINF_FLAG" property="LNSECACCTBASEINF_FLAG" />
+		<result column="LNSECACCTREL_FLAG" property="LNSECACCTREL_FLAG" />
+		<result column="LNSECACCTAMT_FLAG" property="LNSECACCTAMT_FLAG" />
+		<result column="LNSECACCTMOT_FLAG" property="LNSECACCTMOT_FLAG" />
+
+		<collection property="Pb_LnsecAcctRel_Info_List" resultMap="Pb_LnsecAcctRel_Info_Result230"></collection>
+		<collection property="Pb_Guacct_Info_List" resultMap="Pb_Guacct_Info_Result230"></collection>
+	</resultMap>
+
+	<resultMap id="Pb_LnsecAcctRel_Info_Result230" type="com.dhcc.xml.per.entity.guarantee.db.Pb_LnsecAcctRel_Info">
+		<result column="InfoIDType" property="InfoIDType" />
+		<result column="ArlpName" property="ArlpName" />
+		<result column="ArlpCertType" property="ArlpCertType" />
+		<result column="ArlpCertNum" property="ArlpCertNum" />
+		<result column="ArlpType" property="ArlpType" />
+		<result column="ArlpAmt" property="ArlpAmt" />
+		<result column="WartySign" property="WartySign" />
+		<result column="MaxGuarMcc" property="MaxGuarMcc" />
+	</resultMap>
+
+	<!-- 抵、质押信息 -->
+	<resultMap id="Pb_Guacct_Info_Result230" type="com.dhcc.xml.per.entity.guarantee.db.Pb_Guacct_Info">
+		<result column="CcCode" property="CcCode" />
+	</resultMap>
+	
+	<sql id="Pb_LnsecAcct_Info_Columns230">
+	    <![CDATA[
+	    	T1.Record_Id,
+			T1.InfRecType,
+			T1.AcctType,
+			T1.AcctCode,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.MngmtOrgCode,
+			T1.BusiLines,
+			T1.BusiDtilLines,
+			T1.OpenDate,
+			ROUND(T1.AcctCredLine) AS AcctCredLine,
+			T1.Cy,
+			T1.DueDate,
+			T1.GuarMode,
+			T1.OthRepyGuarWay,
+			T1.SecDep,
+			T1.CtrctTxtCd,
+			T1.AcctStatus,
+			ROUND(T1.LoanAmt) AS LoanAmt,
+			T1.RepayPrd,
+			T1.FiveCate,
+			T1.FiveCateAdjDate,
+			ROUND(T1.RiEx) AS RiEx,
+			T1.CompAdvFlag,
+			T1.CloseDate,
+			T1.LNSECACCTBASEINF_FLAG,
+			T1.LNSECACCTREL_FLAG,
+			T1.LNSECACCTAMT_FLAG,
+			T1.LNSECACCTMOT_FLAG,
+			T2.InfoIDType, 
+			T2.ArlpName,
+			T2.ArlpCertType, 
+			T2.ArlpCertNum,
+   			T2.ArlpType, 
+    		ROUND(T2.ArlpAmt) AS ArlpAmt,
+    		T2.WartySign,
+    		T2.MaxGuarMcc,
+    		T3.CcCode
+		 ]]>
+	</sql>
+
+	
+  	<sql id="Pb_LnsecAcct_info_select_where">
+ 		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+		</if>
+
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+
+	</sql>
+		
+	<select id="InSecAcctInfJob_selectAllInfo" resultMap="Pb_LnsecAcct_Info_Result230">
+		SELECT <include refid="Pb_LnsecAcct_Info_Columns230" /> FROM PB_LNSECACCT_INFO T1  
+		LEFT JOIN PB_LNSECACCTREL_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.LNSECACCTREL_FLAG = '1')
+		LEFT JOIN PB_GUACCT_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.LNSECACCTMOT_FLAG = '1')
+		WHERE T1.INFRECTYPE = '230'
+		<include refid="Pb_LnsecAcct_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="InSecAcctInfJob_updatePageNumber">
+		UPDATE PB_LNSECACCT_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '230'
+		<include refid="Pb_LnsecAcct_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="InSecAcctInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_LNCTRCTBASE_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '230'
+		<include refid="Pb_LnsecAcct_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="InSecAcctInfJob_updateCheckSts">
+		UPDATE PB_LNCTRCTBASE_INFO T1 SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '230'
+		<include refid="Pb_LnsecAcct_info_select_where" />
+	</update>
+	<delete id="InSecAcctInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT  1
+		FROM PB_LNCTRCTBASE_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '230'
+		<include refid="Pb_LnsecAcct_info_select_where" />
+		)
+	</delete>
+
+</mapper>

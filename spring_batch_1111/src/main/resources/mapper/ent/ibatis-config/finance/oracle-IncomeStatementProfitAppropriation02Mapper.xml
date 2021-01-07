@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-IncomeStatementProfitAppropriation02Mapper">
+	<resultMap id="EB_FinaPro02_Info_Result" type="com.dhcc.xml.ent.entity.finance.db.EB_FinaPro02_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="EntName" property="EntName" />
+		<result column="EntCertType" property="EntCertType" />
+		<result column="EntCertNum" property="EntCertNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="SheetYear" property="SheetYear" />
+		<result column="SheetType" property="SheetType" />
+		<result column="SheetTypeDivide" property="SheetTypeDivide" />
+		<result column="AuditFirmName" property="AuditFirmName" />
+		<result column="AuditorName" property="AuditorName" />
+		<result column="AuditTime" property="AuditTime" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="MainRevenuefRevenue" property="MainRevenuefRevenue" />
+		<result column="SalesIncomeOfExportGoodsP" property="SalesIncomeOfExportGoodsProducts" />
+		<result column="SalesIncomeOfImportGoodsP" property="SalesIncomeOfImportGoodsProducts" />
+		<result column="DiscountAndAllowance" property="DiscountAndAllowance" />
+		<result column="NetAmountOfIncomeFromMainB" property="NetAmountOfIncomeFromMainBusiness" />
+		<result column="MainOperatingCost" property="MainOperatingCost" />
+		<result column="SalesIncomeOfExportProducts" property="SalesIncomeOfExportProducts" />
+		<result column="PrincipleBusinessTaxAndExtraC" property="PrincipleBusinessTaxAndExtraCharge" />
+		<result column="OperationExpense" property="OperationExpense" />
+		<result column="OthersOperatingCost" property="OthersOperatingCost" />
+		<result column="DeferredIncome" property="DeferredIncome" />
+		<result column="IncomeFromSalesAgency" property="IncomeFromSalesAgency" />
+		<result column="OtherOperatingIncome" property="OtherOperatingIncome" />
+		<result column="PrincipleBusinessProfit" property="PrincipleBusinessProfit" />
+		<result column="OtherBusinessProfit" property="OtherBusinessProfit" />
+		<result column="SellingExpenses" property="SellingExpenses" />
+		<result column="GeneralAndAdministrativeE" property="GeneralAndAdministrativeExpenses" />
+		<result column="FinancialExpenses" property="FinancialExpenses" />
+		<result column="OthersExpenses" property="OthersExpenses" />
+		<result column="OperatingProfits" property="OperatingProfits" />
+		<result column="InvestmentIncome" property="InvestmentIncome" />
+		<result column="FuturesIncome" property="FuturesIncome" />
+		<result column="AllowanceIncome" property="AllowanceIncome" />
+		<result column="AllowanceIncomeBeforeAllowance" property="AllowanceIncomeBeforeAllowance" />
+		<result column="NonOperatingIncome" property="NonOperatingIncome" />
+		<result column="NetGainOnDisposalOfFixedA" property="NetGainOnDisposalOfFixedAssets" />
+		<result column="IncomeFromNonCurrencyTrade" property="IncomeFromNonCurrencyTrade" />
+		<result column="IncomeFromSalesOfIntangibleA" property="IncomeFromSalesOfIntangibleAssets" />
+		<result column="IncomeFromPenalty" property="IncomeFromPenalty" />
+		<result column="OthersIncome" property="OthersIncome" />
+		<result column="CalculatingFromTheContentSB" property="CalculatingFromTheContentSalaryBefore" />
+		<result column="NonOperatingExpenses" property="NonOperatingExpenses" />
+		<result column="LossFromDisposalOfFixedAssets" property="LossFromDisposalOfFixedAssets" />
+		<result column="ExchangeOfNonMonetaryAssetsL" property="ExchangeOfNonMonetaryAssetsLoss" />
+		<result column="LossOfLawsuits" property="LossOfLawsuits" />
+		<result column="PaymentForDonation" property="PaymentForDonation" />
+		<result column="OtherPayments" property="OtherPayments" />
+		<result column="BalanceOfContentSalary" property="BalanceOfContentSalary" />
+		<result column="TotalProfit" property="TotalProfit" />
+		<result column="Incometax" property="Incometax" />
+		<result column="ImparimentLoss" property="ImparimentLoss" />
+		<result column="UnrealizedInvestmentLosses" property="UnrealizedInvestmentLosses" />
+		<result column="NetProfit" property="NetProfit" />
+		<result column="ProfitDistributionAtBOP" property="ProfitDistributionAtBeginningOfPeriod" />
+		<result column="CompensationOfSurplusReserve" property="CompensationOfSurplusReserve" />
+		<result column="OtherAdjustmentFactors" property="OtherAdjustmentFactors" />
+		<result column="ProfitAvailableForDistribution" property="ProfitAvailableForDistribution" />
+		<result column="ProfitReservedForASingleItem" property="ProfitReservedForASingleItem" />
+		<result column="SupplementaryCurrentCapital" property="SupplementaryCurrentCapital" />
+		<result column="AppropriationOfStatutorySR" property="AppropriationOfStatutorySurplusReserves" />
+		<result column="AppropriationOfStatutoryWF" property="AppropriationOfStatutoryWelfareFund" />
+		<result column="AppropriationOfStaffIAWF" property="AppropriationOfStaffIncentiveAndWelfareFund" />
+		<result column="AppropriationOfReserveFund" property="AppropriationOfReserveFund" />
+		<result column="AppropriationOfEnterpriseEF" property="AppropriationOfEnterpriseExpansionFund" />
+		<result column="ProfitsCapitalizadOnROI" property="ProfitsCapitalizadOnReturnOfInvestment" />
+		<result column="Others" property="Others" />
+		<result column="ProfitAvailableForOwnersD" property="ProfitAvailableForOwnersDistribution" />
+		<result column="PreferredStockDividendsPayable" property="PreferredStockDividendsPayable" />
+		<result column="WithdrawalOtherCommonAF" property="WithdrawalOtherCommonAccumulationFund" />
+		<result column="PayableDividendsOfCommonStock" property="PayableDividendsOfCommonStock" />
+		<result column="TransferFromOrdinarySDTPICOS" property="TransferFromOrdinarySharesDividendToPaidInCapitalOrStock" />
+		<result column="OthersForOwners" property="OthersForOwners" />
+		<result column="UnappropriatedProfit" property="UnappropriatedProfit" />
+		<result column="LossCompensatedBeforeTheTax" property="LossCompensatedBeforeTheTax" />
+	</resultMap>
+
+	<sql id="Eb_FinaPro02_Info_Columns">
+		<![CDATA[
+			InfRecType,
+			EntName,
+			EntCertType,
+			EntCertNum,
+			RptDate,
+			SheetYear,
+			SheetType,
+			SheetTypeDivide,
+			AuditFirmName,
+			AuditorName,
+			AuditTime,
+			Cimoc,
+			RptDateCode,
+			to_char(MainRevenuefRevenue,'FM99999999999999990.90') MainRevenuefRevenue,
+			to_char(SalesIncomeOfExportGoodsP,'FM99999999999999990.90') SalesIncomeOfExportGoodsP,
+			to_char(SalesIncomeOfImportGoodsP,'FM99999999999999990.90') SalesIncomeOfImportGoodsP,
+			to_char(DiscountAndAllowance,'FM99999999999999990.90') DiscountAndAllowance,
+			to_char(NetAmountOfIncomeFromMainB,'FM99999999999999990.90') NetAmountOfIncomeFromMainB,
+			to_char(MainOperatingCost,'FM99999999999999990.90') MainOperatingCost,
+			to_char(SalesIncomeOfExportProducts,'FM99999999999999990.90') SalesIncomeOfExportProducts,
+			to_char(PrincipleBusinessTaxAndExtraC,'FM99999999999999990.90') PrincipleBusinessTaxAndExtraC,
+			to_char(OperationExpense,'FM99999999999999990.90') OperationExpense,
+			to_char(OthersOperatingCost,'FM99999999999999990.90') OthersOperatingCost,
+			to_char(DeferredIncome,'FM99999999999999990.90') DeferredIncome,
+			to_char(IncomeFromSalesAgency,'FM99999999999999990.90') IncomeFromSalesAgency,
+			to_char(OtherOperatingIncome,'FM99999999999999990.90') OtherOperatingIncome,
+			to_char(PrincipleBusinessProfit,'FM99999999999999990.90') PrincipleBusinessProfit,
+			to_char(OtherBusinessProfit,'FM99999999999999990.90') OtherBusinessProfit,
+			to_char(SellingExpenses,'FM99999999999999990.90') SellingExpenses,
+			to_char(GeneralAndAdministrativeE,'FM99999999999999990.90') GeneralAndAdministrativeE,
+			to_char(FinancialExpenses,'FM99999999999999990.90') FinancialExpenses,
+			to_char(OthersExpenses,'FM99999999999999990.90') OthersExpenses,
+			to_char(OperatingProfits,'FM99999999999999990.90') OperatingProfits,
+			to_char(InvestmentIncome,'FM99999999999999990.90') InvestmentIncome,
+			to_char(FuturesIncome,'FM99999999999999990.90') FuturesIncome,
+			to_char(AllowanceIncome,'FM99999999999999990.90') AllowanceIncome,
+			to_char(AllowanceIncomeBeforeAllowance,'FM99999999999999990.90') AllowanceIncomeBeforeAllowance,
+			to_char(NonOperatingIncome,'FM99999999999999990.90') NonOperatingIncome,
+			to_char(NetGainOnDisposalOfFixedA,'FM99999999999999990.90') NetGainOnDisposalOfFixedA,
+			to_char(IncomeFromNonCurrencyTrade,'FM99999999999999990.90') IncomeFromNonCurrencyTrade,
+			to_char(IncomeFromSalesOfIntangibleA,'FM99999999999999990.90') IncomeFromSalesOfIntangibleA,
+			to_char(IncomeFromPenalty,'FM99999999999999990.90') IncomeFromPenalty,
+			to_char(OthersIncome,'FM99999999999999990.90') OthersIncome,
+			to_char(CalculatingFromTheContentSB,'FM99999999999999990.90') CalculatingFromTheContentSB,
+			to_char(NonOperatingExpenses,'FM99999999999999990.90') NonOperatingExpenses,
+			to_char(LossFromDisposalOfFixedAssets,'FM99999999999999990.90') LossFromDisposalOfFixedAssets,
+			to_char(ExchangeOfNonMonetaryAssetsL,'FM99999999999999990.90') ExchangeOfNonMonetaryAssetsL,
+			to_char(LossOfLawsuits,'FM99999999999999990.90') LossOfLawsuits,
+			to_char(PaymentForDonation,'FM99999999999999990.90') PaymentForDonation,
+			to_char(OtherPayments,'FM99999999999999990.90') OtherPayments,
+			to_char(BalanceOfContentSalary,'FM99999999999999990.90') BalanceOfContentSalary,
+			to_char(TotalProfit,'FM99999999999999990.90') TotalProfit,
+			to_char(Incometax,'FM99999999999999990.90') Incometax,
+			to_char(ImparimentLoss,'FM99999999999999990.90') ImparimentLoss,
+			to_char(UnrealizedInvestmentLosses,'FM99999999999999990.90') UnrealizedInvestmentLosses,
+			to_char(NetProfit,'FM99999999999999990.90') NetProfit,
+			to_char(ProfitDistributionAtBOP,'FM99999999999999990.90') ProfitDistributionAtBOP,
+			to_char(CompensationOfSurplusReserve,'FM99999999999999990.90') CompensationOfSurplusReserve,
+			to_char(OtherAdjustmentFactors,'FM99999999999999990.90') OtherAdjustmentFactors,
+			to_char(ProfitAvailableForDistribution,'FM99999999999999990.90') ProfitAvailableForDistribution,
+			to_char(ProfitReservedForASingleItem,'FM99999999999999990.90') ProfitReservedForASingleItem,
+			to_char(SupplementaryCurrentCapital,'FM99999999999999990.90') SupplementaryCurrentCapital,
+			to_char(AppropriationOfStatutorySR,'FM99999999999999990.90') AppropriationOfStatutorySR,
+			to_char(AppropriationOfStatutoryWF,'FM99999999999999990.90') AppropriationOfStatutoryWF,
+			to_char(AppropriationOfStaffIAWF,'FM99999999999999990.90') AppropriationOfStaffIAWF,
+			to_char(AppropriationOfReserveFund,'FM99999999999999990.90') AppropriationOfReserveFund,
+			to_char(AppropriationOfEnterpriseEF,'FM99999999999999990.90') AppropriationOfEnterpriseEF,
+			to_char(ProfitsCapitalizadOnROI,'FM99999999999999990.90') ProfitsCapitalizadOnROI,
+			to_char(Others,'FM99999999999999990.90') Others,
+			to_char(ProfitAvailableForOwnersD,'FM99999999999999990.90') ProfitAvailableForOwnersD,
+			to_char(PreferredStockDividendsPayable,'FM99999999999999990.90') PreferredStockDividendsPayable,
+			to_char(WithdrawalOtherCommonAF,'FM99999999999999990.90') WithdrawalOtherCommonAF,
+			to_char(PayableDividendsOfCommonStock,'FM99999999999999990.90') PayableDividendsOfCommonStock,
+			to_char(TransferFromOrdinarySDTPICOS,'FM99999999999999990.90') TransferFromOrdinarySDTPICOS,
+			to_char(OthersForOwners,'FM99999999999999990.90') OthersForOwners,
+			to_char(UnappropriatedProfit,'FM99999999999999990.90') UnappropriatedProfit,
+			to_char(LossCompensatedBeforeTheTax,'FM99999999999999990.90') LossCompensatedBeforeTheTax
+		]]>
+	</sql>
+	
+	<!-- 机构关联限制 -->
+	<sql id="Eb_FinaPro02_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<!-- 读取数据 -->
+	<select id="IncomeStatementProfitAppropriation02Job_selectAllInfo" resultMap="EB_FinaPro02_Info_Result">
+		SELECT <include refid="Eb_FinaPro02_Info_Columns" /> FROM EB_FINAPRO02_INFO T1
+		WHERE T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro02_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="IncomeStatementProfitAppropriation02Job_updatePageNumber">
+		UPDATE EB_FINAPRO02_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro02_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="IncomeStatementProfitAppropriation02Job_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_FINAPRO02_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro02_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="IncomeStatementProfitAppropriation02Job_updateCheckSts">
+		UPDATE EB_FINAPRO02_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro02_info_select_where" />
+	</update>
+	<delete id="IncomeStatementProfitAppropriation02Job_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_FINAPRO02_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '620'
+		<include refid="Eb_FinaPro02_info_select_where" />
+		)
+	</delete>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SubmitOrgInfoMapper">
+	<!-- 报送人员相关信息 -->
+	<resultMap id="SubmitOrg_Info_Result" type="com.dhcc.xml.entity.SubmitOrgInfo" >
+		<result column="id" property="id"/>
+		<result column="inst_Name" property="instName"/>
+		<result column="bs_Name" property="bsName"/>
+		<result column="bs_Phone" property="bsPhone"/>
+		<result column="bs_Brno" property="bsBrno"/>
+		<result column="area_Id" property="areaId"/>
+		<result column="sys_Code" property="sysCode"/>
+		<result column="brno_Type" property="brnoType"/>
+		<result column="org_Code" property="orgCode"/>
+		<result column="cri_Version" property="criVersion"/>
+		<result column="mode_Type" property="modeType"/>
+		<result column="submit_Num" property="submitNum"/>
+		<result column="sts" property="sts"/>
+	</resultMap>
+	<!-- 查询报送人员相关信息-->
+	<sql id="SubmitOrg_Info_Columns">
+	    <![CDATA[
+	   		id,
+        	inst_name,
+			bs_name,
+			bs_phone,
+			bs_brno,
+			area_id,
+			sys_code,
+			brno_type,
+			org_code,
+			cri_version,
+			mode_type,
+			submit_num,
+			sts
+	    ]]>
+	</sql>
+	<!-- 查询报送机构信息 -->
+	<select id="SubmitOrg_Info_selectInfo" resultMap="SubmitOrg_Info_Result">
+		SELECT <include refid="SubmitOrg_Info_Columns"/> FROM S_SUBMITORG_INFO
+		WHERE STS='1' 
+	</select>
+	<!-- 查询相关路径信息 -->
+	<select id="S_PATH_INFO_getPath" resultType="String">
+		SELECT PATH FROM S_PATH_INFO WHERE NAME=#{name}
+	</select>
+	<!-- 查询报文序号 -->
+	<select id="S_MSG_SERIALNO_getSerialNo" resultType="String">
+		SELECT serial_no FROM S_MSG_SERIALNO WHERE org_code=#{orgCode} and msg_date=#{msgDate} and infrectype=#{infRecType}
+	</select>
+	<!-- 新增报文序号 -->
+	<insert id="S_MSG_SERIALNO_insSerialNo">
+		INSERT INTO S_MSG_SERIALNO(ORG_CODE,MSG_DATE,INFRECTYPE,SERIAL_NO,CRI_TYPE) values(#{orgCode,jdbcType=VARCHAR},#{msgDate,jdbcType=VARCHAR},#{infRecType,jdbcType=VARCHAR},'002','1')
+	</insert>
+	<!-- 更新报文序号 -->
+	<update id="S_MSG_SERIALNO_updSerialNo">
+		UPDATE S_MSG_SERIALNO A SET A.SERIAL_NO=REPLACE(LPAD(A.SERIAL_NO+1,3),' ','0') WHERE org_code=#{orgCode} and msg_date=#{msgDate} and infrectype=#{infRecType}
+	</update>
+</mapper>

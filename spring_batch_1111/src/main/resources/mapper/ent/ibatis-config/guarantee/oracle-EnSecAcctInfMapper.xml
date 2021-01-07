@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-EnSecAcctInfMapper">
+	<resultMap id="Eb_GuarAcc_Info_Result440" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_GuarAcc_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="AcctType" property="AcctType" />
+		<result column="AcctCode" property="AcctCode" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="MngmtOrgCode" property="MngmtOrgCode" />
+		<result column="BusiLines" property="BusiLines" />
+		<result column="BusiDtilLines" property="BusiDtilLines" />
+		<result column="OpenDate" property="OpenDate" />
+		<result column="GuarAmt" property="GuarAmt" />
+		<result column="Cy" property="Cy" />
+		<result column="DueDate" property="DueDate" />
+		<result column="GuarMode" property="GuarMode" />
+		<result column="OthRepyGuarWay" property="OthRepyGuarWay" />
+		<result column="SecDep" property="SecDep" />
+		<result column="CtrctTxtCode" property="CtrctTxtCode" />
+		<result column="Mcc" property="Mcc" />
+		<result column="AcctStatus" property="AcctStatus" />
+		<result column="LoanAmt" property="LoanAmt" />
+		<result column="RepayPrd" property="RepayPrd" />
+		<result column="FiveCate" property="FiveCate" />
+		<result column="FiveCateAdjDate" property="FiveCateAdjDate" />
+		<result column="RiEx" property="RiEx" />
+		<result column="CompAdvFlag" property="CompAdvFlag" />
+		<result column="CloseDate" property="CloseDate" />
+		
+		<result column="GUARACCBASEINF_FLAG" property="GUARACCBASEINF_FLAG" />
+		<result column="GUARACCREL_FLAG" property="GUARACCREL_FLAG" />
+		<result column="GUARACCMOT_FLAG" property="GUARACCMOT_FLAG" />
+		<result column="GUARACCMCC_FLAG" property="GUARACCMCC_FLAG" />
+		<result column="GUARACCAMT_FLAG" property="GUARACCAMT_FLAG" />
+
+		<collection property="Eb_GuarAccRel_Info_List" resultMap="Eb_GuarAccRel_Info_Result440"></collection>
+		<collection property="Eb_Guacct_Info_List" resultMap="Eb_Guacct_Info_Result440"></collection>
+	</resultMap>
+
+	<resultMap id="Eb_GuarAccRel_Info_Result440" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_GuarAccRel_Info">
+		<result column="InfoIDType" property="InfoIDType" />
+		<result column="ArlpName" property="ArlpName" />
+		<result column="ArlpCertType" property="ArlpCertType" />
+		<result column="ArlpCertNum" property="ArlpCertNum" />
+		<result column="ArlpType" property="ArlpType" />
+		<result column="ArlpAmt" property="ArlpAmt" />
+		<result column="WartySign" property="WartySign" />
+		<result column="MaxGuarMcc" property="MaxGuarMcc" />
+	</resultMap>
+	
+	<!-- 抵、质押信息 -->
+	<resultMap id="Eb_Guacct_Info_Result440" type="com.dhcc.xml.ent.entity.guarantee.db.Eb_Guacct_Info">
+		<result column="CcCode" property="CcCode" />
+	</resultMap>
+
+	<sql id="Eb_GuarAcc_Info_Columns440">
+	    <![CDATA[
+	    	T1.Record_Id,
+			T1.InfRecType,
+			T1.AcctType,
+			T1.AcctCode,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.MngmtOrgCode,
+			T1.BusiLines,
+			T1.BusiDtilLines,
+			T1.OpenDate,
+			ROUND(T1.GuarAmt) AS GuarAmt,
+			T1.Cy,
+			T1.DueDate,
+			T1.GuarMode,
+			T1.OthRepyGuarWay,
+			T1.SecDep,
+			T1.CtrctTxtCode,
+			T1.Mcc,
+			T1.AcctStatus,
+			ROUND(T1.LoanAmt) AS LoanAmt,
+			T1.RepayPrd,
+			T1.FiveCate,
+			T1.FiveCateAdjDate,
+			ROUND(T1.RiEx) AS RiEx,
+			T1.CompAdvFlag,
+			T1.CloseDate,
+			T1.GUARACCBASEINF_FLAG,
+			T1.GUARACCREL_FLAG,
+			T1.GUARACCMOT_FLAG,
+			T1.GUARACCMCC_FLAG,
+			T1.GUARACCAMT_FLAG,
+			T2.InfoIDType,
+			T2.ArlpName,
+			T2.ArlpCertType,
+			T2.ArlpCertNum,
+			T2.ArlpType,
+			ROUND(T2.ArlpAmt) AS ArlpAmt,
+			T2.WartySign,
+    		T2.MaxGuarMcc,
+			T3.CcCode
+		]]>
+	</sql>
+	
+	<!-- 机构关联限制 -->
+	<sql id="Eb_GuarAcc_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	
+	<select id="EnSecAcctInfJob_selectAllInfo" resultMap="Eb_GuarAcc_Info_Result440">
+		SELECT <include refid="Eb_GuarAcc_Info_Columns440" /> FROM EB_GUARACC_INFO T1  
+		LEFT JOIN EB_GUARACCREL_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.GUARACCREL_FLAG = '1')
+		LEFT JOIN EB_GUACCT_INFO T3 ON (T1.RECORD_ID = T3.MAIN_ID AND T1.GUARACCMOT_FLAG = '1')
+		WHERE T1.INFRECTYPE = '440'
+		<include refid="Eb_GuarAcc_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="EnSecAcctInfJob_updatePageNumber">
+		UPDATE EB_GUARACC_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '440'
+		<include refid="Eb_GuarAcc_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="EnSecAcctInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_GUARACC_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '440'
+		<include refid="Eb_GuarAcc_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="EnSecAcctInfJob_updateCheckSts">
+		UPDATE EB_GUARACC_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '440'
+		<include refid="Eb_GuarAcc_info_select_where" />
+	</update>
+	<delete id="EnSecAcctInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_GUARACC_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '440'
+		<include refid="Eb_GuarAcc_info_select_where" />
+		)
+	</delete>
+
+</mapper>

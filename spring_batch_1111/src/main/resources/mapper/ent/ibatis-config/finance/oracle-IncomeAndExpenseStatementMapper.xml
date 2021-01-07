@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-IncomeAndExpenseStatementMapper">
+	<resultMap id="EB_FinaIncExp_Info_Result" type="com.dhcc.xml.ent.entity.finance.db.EB_FinaIncExp_Info">
+		<result column="InfRecType" property="InfRecType" />
+		<result column="EntName" property="EntName" />
+		<result column="EntCertType" property="EntCertType" />
+		<result column="EntCertNum" property="EntCertNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="SheetYear" property="SheetYear" />
+		<result column="SheetType" property="SheetType" />
+		<result column="SheetTypeDivide" property="SheetTypeDivide" />
+		<result column="AuditFirmName" property="AuditFirmName" />
+		<result column="AuditorName" property="AuditorName" />
+		<result column="AuditTime" property="AuditTime" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="CurrentFinancialSubsidyCOB" property="CurrentFinancialSubsidyCarriedOverBalance" />
+		<result column="FinancialSubsidyRevenue" property="FinancialSubsidyRevenue" />
+		<result column="UndertakingsExpenditureFSE" property="UndertakingsExpenditureFinancialSubsidyExpenditure" />
+		<result column="CurrentUndertakingsCarriedOB" property="CurrentUndertakingsCarriedOverBalance" />
+		<result column="UndertakingsClassRevenue" property="UndertakingsClassRevenue" />
+		<result column="UndertakingsRevenue" property="UndertakingsRevenue" />
+		<result column="SuperiorSubsidyRevenue" property="SuperiorSubsidyRevenue" />
+		<result column="RevenueTurnedOverBySU" property="RevenueTurnedOverBySubsidiaryUnit" />
+		<result column="OtherRevenue" property="OtherRevenue" />
+		<result column="DonationIncome" property="DonationIncome" />
+		<result column="UndertakingsClassExpenditure" property="UndertakingsClassExpenditure" />
+		<result column="UndertakingsExpenditureNonFSE" property="UndertakingsExpenditureNonFinancialSubsidyExpenditure" />
+		<result column="PaymentToTheHigherAuthority" property="PaymentToTheHigherAuthority" />
+		<result column="GrantToTheAuxiliaryO" property="GrantToTheAuxiliaryOrganization" />
+		<result column="OtherExpenditure" property="OtherExpenditure" />
+		<result column="CurrentOperatingBalance" property="CurrentOperatingBalance" />
+		<result column="OperatingRevenue" property="OperatingRevenue" />
+		<result column="OperatingExpenditure" property="OperatingExpenditure" />
+		<result column="OperatingBalanceMadeUpFoOTPYOL" property="OperatingBalanceMadeUpForOfThePreviousYearsOperatingLoss" />
+		<result column="NonFinancialSubsidyCarriedOBTY" property="NonFinancialSubsidyCarriedOverBalanceThisYear" />
+		<result column="NonFinancialAidCarriedOver" property="NonFinancialAidCarriedOver" />
+		<result column="NonFinancialAidBalanceThisYear" property="NonFinancialAidBalanceThisYear" />
+		<result column="EnterpriseIncomeTaxPayable" property="EnterpriseIncomeTaxPayable" />
+		<result column="SpecialFundsToExtract" property="SpecialFundsToExtract" />
+		<result column="PublicFundTurnedInto" property="PublicFundTurnedInto" />
+	</resultMap>
+
+	<sql id="Eb_FinaIncExp_Info_Columns">
+		<![CDATA[
+			InfRecType,
+			EntName,
+			EntCertType,
+			EntCertNum,
+			RptDate,
+			SheetYear,
+			SheetType,
+			SheetTypeDivide,
+			AuditFirmName,
+			AuditorName,
+			AuditTime,
+			Cimoc,
+			RptDateCode,
+			to_char(CurrentFinancialSubsidyCOB,'FM99999999999999990.90') CurrentFinancialSubsidyCOB,
+			to_char(FinancialSubsidyRevenue,'FM99999999999999990.90') FinancialSubsidyRevenue,
+			to_char(UndertakingsExpenditureFSE,'FM99999999999999990.90') UndertakingsExpenditureFSE,
+			to_char(CurrentUndertakingsCarriedOB,'FM99999999999999990.90') CurrentUndertakingsCarriedOB,
+			to_char(UndertakingsClassRevenue,'FM99999999999999990.90') UndertakingsClassRevenue,
+			to_char(UndertakingsRevenue,'FM99999999999999990.90') UndertakingsRevenue,
+			to_char(SuperiorSubsidyRevenue,'FM99999999999999990.90') SuperiorSubsidyRevenue,
+			to_char(RevenueTurnedOverBySU,'FM99999999999999990.90') RevenueTurnedOverBySU,
+			to_char(OtherRevenue,'FM99999999999999990.90') OtherRevenue,
+			to_char(DonationIncome,'FM99999999999999990.90') DonationIncome,
+			to_char(UndertakingsClassExpenditure,'FM99999999999999990.90') UndertakingsClassExpenditure,
+			to_char(UndertakingsExpenditureNonFSE,'FM99999999999999990.90') UndertakingsExpenditureNonFSE,
+			to_char(PaymentToTheHigherAuthority,'FM99999999999999990.90') PaymentToTheHigherAuthority,
+			to_char(GrantToTheAuxiliaryO,'FM99999999999999990.90') GrantToTheAuxiliaryO,
+			to_char(OtherExpenditure,'FM99999999999999990.90') OtherExpenditure,
+			to_char(CurrentOperatingBalance,'FM99999999999999990.90') CurrentOperatingBalance,
+			to_char(OperatingRevenue,'FM99999999999999990.90') OperatingRevenue,
+			to_char(OperatingExpenditure,'FM99999999999999990.90') OperatingExpenditure,
+			to_char(OperatingBalanceMadeUpFoOTPYOL,'FM99999999999999990.90') OperatingBalanceMadeUpFoOTPYOL,
+			to_char(NonFinancialSubsidyCarriedOBTY,'FM99999999999999990.90') NonFinancialSubsidyCarriedOBTY,
+			to_char(NonFinancialAidCarriedOver,'FM99999999999999990.90') NonFinancialAidCarriedOver,
+			to_char(NonFinancialAidBalanceThisYear,'FM99999999999999990.90') NonFinancialAidBalanceThisYear,
+			to_char(EnterpriseIncomeTaxPayable,'FM99999999999999990.90') EnterpriseIncomeTaxPayable,
+			to_char(SpecialFundsToExtract,'FM99999999999999990.90') SpecialFundsToExtract,
+			to_char(PublicFundTurnedInto,'FM99999999999999990.90') PublicFundTurnedInto
+		]]>
+	</sql>
+	<!-- 机构关联限制 -->
+	<sql id="Eb_FinaIncExp_info_select_where">
+		<if test="br_no !=''">
+			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+		</if>
+		<if test="tx_date !=''">
+			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		</if>
+
+		<if test="record_id !='' and record_id !=null">
+			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+		</if>
+		<if test="record_id ==null">
+			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+		</if>
+		<if test="_fromNumber != null and _toNumber !=null">
+			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+		</if>
+	</sql>
+	<!-- 读取数据 -->
+	<select id="IncomeAndExpenseStatementJob_selectAllInfo" resultMap="EB_FinaIncExp_Info_Result">
+		SELECT <include refid="Eb_FinaIncExp_Info_Columns" /> FROM EB_FINAINCEXP_INFO T1
+		WHERE T1.INFRECTYPE = '650'
+		<include refid="Eb_FinaIncExp_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="IncomeAndExpenseStatementJob_updatePageNumber">
+		UPDATE EB_FINAINCEXP_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '650'
+		<include refid="Eb_FinaIncExp_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="IncomeAndExpenseStatementJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM EB_FINAINCEXP_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '650'
+		<include refid="Eb_FinaIncExp_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="IncomeAndExpenseStatementJob_updateCheckSts">
+		UPDATE EB_FINAINCEXP_INFO T1
+		SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1'
+		AND T1.INFRECTYPE = '650'
+		<include refid="Eb_FinaIncExp_info_select_where" />
+	</update>
+	<delete id="IncomeAndExpenseStatementJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT 1
+		FROM EB_FINAINCEXP_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+		AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '650'
+		<include refid="Eb_FinaIncExp_info_select_where" />
+		)
+	</delete>
+
+</mapper>

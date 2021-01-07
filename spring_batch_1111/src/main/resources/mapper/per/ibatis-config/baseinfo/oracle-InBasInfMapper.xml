@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="oracle-InBasInfMapper">
+	<!-- 基础段+额度信息段 -->
+	<resultMap id="Pb_CustBase_Info_Result110" type="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBase_Info">
+		<result column="Record_Id" property="Record_Id" />
+		<result column="InfRecType" property="InfRecType" />
+		<result column="InfSurcCode" property="InfSurcCode" />
+		<result column="Name" property="Name" />
+		<result column="IDType" property="IDType" />
+		<result column="IDNum" property="IDNum" />
+		<result column="RptDate" property="RptDate" />
+		<result column="RptDateCode" property="RptDateCode" />
+		<result column="Cimoc" property="Cimoc" />
+		<result column="CustomerType" property="CustomerType" />
+		<result column="Sex" property="Sex" />
+		<result column="DOB" property="DOB" />
+		<result column="Nation" property="Nation" />
+		<result column="HouseAdd" property="HouseAdd" />
+		<result column="HhDist" property="HhDist" />
+		<result column="CellPhone" property="CellPhone" />
+		<result column="Email" property="Email" />
+		<result column="FcsInfoUpDate" property="FcsInfoUpDate" />
+		<result column="MariStatus" property="MariStatus" />
+		<result column="SpoName" property="SpoName" />
+		<result column="SpoIDType" property="SpoIDType" />
+		<result column="SpoIDNum" property="SpoIDNum" />
+		<result column="SpoTel" property="SpoTel" />
+		<result column="SpsCmpyNm" property="SpsCmpyNm" />
+		<result column="SpsInfoUpDate" property="SpsInfoUpDate" />
+		<result column="EduLevel" property="EduLevel" />
+		<result column="AcaDegree" property="AcaDegree" />
+		<result column="EduInfoUpDate" property="EduInfoUpDate" />
+		<result column="EmpStatus" property="EmpStatus" />
+		<result column="CpnName" property="CpnName" />
+		<result column="CpnType" property="CpnType" />
+		<result column="Industry" property="Industry" />
+		<result column="CpnAddr" property="CpnAddr" />
+		<result column="CpnPc" property="CpnPc" />
+		<result column="CpnDist" property="CpnDist" />
+		<result column="CpnTEL" property="CpnTEL" />
+		<result column="Occupation" property="Occupation" />
+		<result column="Title" property="Title" />
+		<result column="TechTitle" property="TechTitle" />
+		<result column="WorkStartDate" property="WorkStartDate" />
+		<result column="OctpnInfoUpDate" property="OctpnInfoUpDate" />
+		<result column="ResiStatus" property="ResiStatus" />
+		<result column="ResiAddr" property="ResiAddr" />
+		<result column="ResiPc" property="ResiPc" />
+		<result column="ResiDist" property="ResiDist" />
+		<result column="HomeTel" property="HomeTel" />
+		<result column="ResiInfoUpDate" property="ResiInfoUpDate" />
+		<result column="MailAddr" property="MailAddr" />
+		<result column="MailPc" property="MailPc" />
+		<result column="MailDist" property="MailDist" />
+		<result column="MlgInfoUpDate" property="MlgInfoUpDate" />
+		<result column="AnnlInc" property="AnnlInc" />
+		<result column="TaxIncome" property="TaxIncome" />
+		<result column="IncInfoUpDate" property="IncInfoUpDate" />
+		
+		<result column="CUSTBASEOTH_FLAG" property="CUSTBASEOTH_FLAG" />
+		<result column="CUSTBASEINF_FLAG" property="CUSTBASEINF_FLAG" />
+		<result column="CUSTBASEMARI_FLAG" property="CUSTBASEMARI_FLAG" />
+		<result column="CUSTBASEEDU_FLAG" property="CUSTBASEEDU_FLAG" />
+		<result column="CUSTBASEJOB_FLAG" property="CUSTBASEJOB_FLAG" />
+		<result column="CUSTBASEADD_FLAG" property="CUSTBASEADD_FLAG" />
+		<result column="CUSTBASETEL_FLAG" property="CUSTBASETEL_FLAG" />
+		<result column="CUSTBASEMONEY_FLAG" property="CUSTBASEMONEY_FLAG" />
+		<collection property="Pb_CustBaseOth_Info_List" resultMap="Pb_CustBaseOth_Info_Result110"></collection>
+	</resultMap>
+
+	<!-- 其他标识段 -->
+	<resultMap id="Pb_CustBaseOth_Info_Result110" type="com.dhcc.xml.per.entity.baseinfo.db.Pb_CustBaseOth_Info">
+		<result column="Alias" property="Alias" />
+		<result column="OthIDType" property="OthIDType" />
+		<result column="OthIDNum" property="OthIDNum" />
+	</resultMap>
+
+	<sql id="Pb_CustBase_Info_Columns">
+	    <![CDATA[
+	    	T1.Record_Id,
+			T1.InfRecType,
+			T1.InfSurcCode,
+			T1.Name,
+			T1.IDType,
+			T1.IDNum,
+			T1.RptDate,
+			T1.RptDateCode,
+			T1.Cimoc,
+			T1.CustomerType,
+			T1.Sex,
+			T1.DOB,
+			T1.Nation,
+			T1.HouseAdd,
+			T1.HhDist,
+			T1.CellPhone,
+			T1.Email,
+			T1.FcsInfoUpDate,
+			T1.MariStatus,
+			T1.SpoName,
+			T1.SpoIDType,
+			T1.SpoIDNum,
+			T1.SpoTel,
+			T1.SpsCmpyNm,
+			T1.SpsInfoUpDate,
+			T1.EduLevel,
+			T1.AcaDegree,
+			T1.EduInfoUpDate,
+			T1.EmpStatus,
+			T1.CpnName,
+			T1.CpnType,
+			T1.Industry,
+			T1.CpnAddr,
+			T1.CpnPc,
+			T1.CpnDist,
+			T1.CpnTEL,
+			T1.Occupation,
+			T1.Title,
+			T1.TechTitle,
+			T1.WorkStartDate,
+			T1.OctpnInfoUpDate,
+			T1.ResiStatus,
+			T1.ResiAddr,
+			T1.ResiPc,
+			T1.ResiDist,
+			T1.HomeTel,
+			T1.ResiInfoUpDate,
+			T1.MailAddr,
+			T1.MailPc,
+			T1.MailDist,
+			T1.MlgInfoUpDate,
+			ROUND(T1.AnnlInc) AS AnnlInc,
+			ROUND(T1.TaxIncome) AS TaxIncome,
+			T1.IncInfoUpDate,
+			T1.CUSTBASEOTH_FLAG,
+			T1.CUSTBASEINF_FLAG,
+			T1.CUSTBASEMARI_FLAG,
+			T1.CUSTBASEEDU_FLAG,
+			T1.CUSTBASEJOB_FLAG,
+			T1.CUSTBASEADD_FLAG,
+			T1.CUSTBASETEL_FLAG,
+			T1.CUSTBASEMONEY_FLAG,
+			T2.Alias,
+			T2.OthIDType,
+			T2.OthIDNum
+	    ]]>
+	</sql>
+	<sql id="Pb_CustBase_info_select_where">
+		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A,PB_LNACCT_INFO C WHERE A.BS_KEY_DATA=C.ACCTCODE AND T1.CUST_NO=C.CUST_NO AND A.STS='1')
+			<if test="br_no !=''">
+				and EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH S.BR_NO=#{br_no} CONNECT BY PRIOR S.BR_NO = S.UP_ONE)
+			</if>
+
+			<if test="tx_date !=''">
+				and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+			</if>
+
+			<if test="record_id !='' and record_id !=null">
+				and T1.record_id = #{record_id,jdbcType=VARCHAR}
+			</if>
+			<if test="record_id ==null">
+				and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+			</if>
+			<if test="_fromNumber != null and _toNumber !=null">
+				and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+			</if>
+	</sql>
+	
+	<!-- 主表 -->
+	<select id="InBasInfJob_selectAllInfo" resultMap="Pb_CustBase_Info_Result110">
+		SELECT <include refid="Pb_CustBase_Info_Columns" /> FROM PB_CUSTBASE_INFO T1  
+		LEFT JOIN PB_CUSTBASEOTH_INFO T2 ON (T1.RECORD_ID = T2.MAIN_ID AND T1.CUSTBASEOTH_FLAG = '1')
+		WHERE T1.INFRECTYPE = '110'
+		<include refid="Pb_CustBase_info_select_where" />
+	</select>
+	
+	<!-- 更新需要生成报文的数据项 -->
+	<update id="InBasInfJob_updatePageNumber">
+		UPDATE PB_CUSTBASE_INFO T1 SET T1.PAGENUMBER = ROWNUM WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '110'
+		<include refid="Pb_CustBase_info_select_where" />
+	</update>
+	
+	<!-- 获取最大的待生成报文的条数 -->
+	<select id="InBasInfJob_getMaxPageNumber" resultType="String">
+		SELECT MAX(T1.PAGENUMBER) FROM PB_CUSTBASE_INFO T1 WHERE T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1' AND T1.INFRECTYPE = '110'
+		<include refid="Pb_CustBase_info_select_where" />
+	</select>
+
+	<!-- 批量校验回刷校验状态-->
+	<update id="InBasInfJob_updateCheckSts">
+		UPDATE PB_CUSTBASE_INFO T1 SET T1.CHECK_STS = '1'
+		WHERE T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '110'
+		<include refid="Pb_CustBase_info_select_where"/>
+	</update>
+	<delete id="InBasInfJob_dleError">
+		DELETE V_ERROR_INFO B
+		WHERE EXISTS (SELECT  1
+			FROM PB_CUSTBASE_INFO T1
+		WHERE B.RECORD_ID = T1.RECORD_ID
+			AND T1.RPT_TYPE = '1' AND T1.INFRECTYPE = '110'
+		<include refid="Pb_CustBase_info_select_where"/>
+		)
+	</delete>
+	
+</mapper>
