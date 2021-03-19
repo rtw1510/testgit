@@ -18,7 +18,7 @@ import javax.annotation.PreDestroy;
 @Component
 public class Testqd  implements DisposableBean, ExitCodeGenerator {
     public Testqd() {
-        System.out.println("创建");
+        System.out.println("创建s");
     }
 
     @PostConstruct
