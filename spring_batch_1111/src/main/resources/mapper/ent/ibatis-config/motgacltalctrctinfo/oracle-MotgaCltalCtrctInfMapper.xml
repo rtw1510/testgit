@@ -117,20 +117,22 @@
 	<sql id="Eb_Guacct_info_select_where">
 		AND NOT EXISTS (SELECT 1 FROM S_SINGLEHIDDEN_INFO A,EB_CORPACCMOT_INFO C WHERE A.BS_KEY_DATA=C.ACCTCODE AND T1.CCCODE=C.CCC AND A.STS='1')
  		<if test="br_no !=''">
-			and	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
+			AND	EXISTS (SELECT 1 FROM S_ORG_INFO S WHERE T1.BR_NO=S.BR_NO START WITH BR_NO=#{br_no} CONNECT BY PRIOR BR_NO=UP_ONE)
 		</if>
-		<if test="tx_date !=''">
-			and T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
+		<if test="tx_date !='' and tx_date!=null">
+			AND T1.TX_DATE = #{tx_date,jdbcType=VARCHAR}
 		</if>
 
 		<if test="record_id !='' and record_id !=null">
-			and T1.record_id = #{record_id,jdbcType=VARCHAR}
+			AND T1.record_id = #{record_id,jdbcType=VARCHAR}
 		</if>
-		<if test="record_id ==null">
-			and T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
+
+		<if test="record_id ='' or record_id=null">
+			AND T1.RPT_TYPE = '1' AND T1.CHECK_STS = '1'
 		</if>
+
 		<if test="_fromNumber != null and _toNumber !=null">
-			and T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
+			AND T1.PAGENUMBER  <![CDATA[ < ]]> #{_toNumber} AND T1.PAGENUMBER  <![CDATA[ >= ]]> #{_fromNumber}
 		</if>
 	</sql>
 	
