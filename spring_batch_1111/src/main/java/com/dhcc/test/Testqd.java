@@ -23,7 +23,7 @@ public class Testqd  implements DisposableBean, ExitCodeGenerator {
 
     @PostConstruct
     public void Test1(){
-        System.out.println("项目初始化。。。");
+        System.out.println("项目初始化");
     }
     @Override
     public int getExitCode() {
